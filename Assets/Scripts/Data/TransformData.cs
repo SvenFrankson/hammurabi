@@ -6,6 +6,10 @@ namespace Hammurabi
 {
     [System.Serializable]
 	public class TransformData: ComponentData {
+		
+        public Vector3Data p;
+        public QuaternionData r;
+
 		public static TransformData TransformDataFromSource(Transform target) {
 			Debug.Log("Serialize Transform");
 			TransformData data = new TransformData();

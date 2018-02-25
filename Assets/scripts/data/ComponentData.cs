@@ -7,8 +7,6 @@ namespace Hammurabi
     [System.Serializable]
 	public class ComponentData {
         public string n = "Component";
-        public Vector3Data p;
-        public QuaternionData r;
 
 		public static ComponentData ComponentDataFromSource(Component target) {
 			if (target is Transform) {
@@ -17,8 +15,7 @@ namespace Hammurabi
 			return new ComponentData();
 		}
 		virtual public string ToJson() {
-			string jsonData = "{\"n\":\"Component\"}";
-			return jsonData;
+			return null;
 		}
     }
 }

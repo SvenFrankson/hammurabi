@@ -24,10 +24,15 @@ namespace Hammurabi {
 
 		public string ToJson() {
 			string jsonData = "{\"n\":\"" + this.n + "\",\"c\":[";
+			bool first = true;
 			for (int i = 0; i < this.c.Length; i++) {
-				jsonData += this.c[i].ToJson();
-				if (i < this.c.Length - 1) {
-					jsonData += ",";
+				string componentJsonData = this.c[i].ToJson();
+				if (componentJsonData != null) {
+					if (!first) {
+						jsonData += ",";
+					}
+					jsonData += componentJsonData;
+					first = false;
 				}
 			}
 			jsonData += "]}";
