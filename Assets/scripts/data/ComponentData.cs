@@ -12,6 +12,9 @@ namespace Hammurabi
 			if (target is Transform) {
                 return TransformData.TransformDataFromSource(target as Transform);
 			}
+			if (target is Camera) {
+                return CameraData.CameraDataFromSource(target as Camera);
+			}
 			return new ComponentData();
 		}
 		virtual public string ToJson() {
