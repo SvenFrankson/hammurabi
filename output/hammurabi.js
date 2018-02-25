@@ -237,6 +237,7 @@ var Hammurabi;
             return this._spotAngle;
         }
         set spotAngle(v) {
+            this._spotAngle = v;
             if (this._lightInstance instanceof BABYLON.SpotLight) {
                 this._lightInstance.angle = v / 180 * Math.PI;
             }
@@ -250,7 +251,7 @@ var Hammurabi;
             return directionalLight;
         }
         _usePointLight() {
-            let pointLight = new BABYLON.PointLight("light_instance", BABYLON.Vector3.Up(), this.scene);
+            let pointLight = new BABYLON.PointLight("light_instance", BABYLON.Vector3.Zero(), this.scene);
             return pointLight;
         }
     }
@@ -424,6 +425,7 @@ var Hammurabi;
                                 let m = new Hammurabi.Mesh();
                                 Loader._setMeshAt(data, m);
                                 Hammurabi.Mesh.references.set(ref, m);
+                                console.log("Mesh " + ref + " loaded");
                                 resolve(m);
                             },
                             error: () => {
@@ -437,10 +439,10 @@ var Hammurabi;
         static _setMeshAt(data, target) {
             target.positions = data.v;
             target.indices = data.i;
-            if (data.n) {
+            if (data.n && data.n.length > 0) {
                 target.normals = data.n;
             }
-            if (data.u) {
+            if (data.u && data.u.length > 0) {
                 target.uvs = data.u;
             }
         }

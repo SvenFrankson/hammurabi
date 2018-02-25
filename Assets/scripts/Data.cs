@@ -10,24 +10,9 @@ namespace Hammurabi
         Material = 3
     }
 
-	public enum LightType {
-        Spot = 0,
-        Directional = 1,
-        Point = 2,
-        Area = 3,
-        Undefined = 4
-    }
-    
-    public class Color {
-        public float r;
-        public float g;
-        public float b;
-        public float a;
-    }
-    
     public class Material {
         public string name;
-        public Color color;
+        public ColorData color;
     }
     
     public class SerializedProperty {

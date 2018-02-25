@@ -197,6 +197,7 @@ module Hammurabi {
                                     let m = new Mesh();
                                     Loader._setMeshAt(data, m);
                                     Mesh.references.set(ref, m);
+                                    console.log("Mesh " + ref + " loaded");
                                     resolve(m);
                                 },
                                 error: () => {
@@ -212,10 +213,10 @@ module Hammurabi {
         private static _setMeshAt(data: IMesh, target: Mesh): void {
             target.positions = data.v;
             target.indices = data.i;
-            if (data.n) {
+            if (data.n && data.n.length > 0) {
                 target.normals = data.n;
             }
-            if (data.u) {
+            if (data.u && data.u.length > 0) {
                 target.uvs = data.u;
             }
         }

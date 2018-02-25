@@ -15,6 +15,9 @@ namespace Hammurabi
 			if (target is Camera) {
                 return CameraData.CameraDataFromSource(target as Camera);
 			}
+			if (target is Light) {
+                return LightData.LightDataFromSource(target as Light);
+			}
 			if (target is MeshFilter) {
                 return MeshFilterData.MeshFilterDataFromSource(target as MeshFilter);
 			}

@@ -70,6 +70,7 @@ module Hammurabi {
             return this._spotAngle;
         }
         public set spotAngle(v: number) {
+            this._spotAngle = v;
             if (this._lightInstance instanceof BABYLON.SpotLight) {
                 this._lightInstance.angle = v / 180 * Math.PI;
             }
@@ -109,7 +110,7 @@ module Hammurabi {
         private _usePointLight(): BABYLON.PointLight {
             let pointLight: BABYLON.PointLight = new BABYLON.PointLight(
                 "light_instance",
-                BABYLON.Vector3.Up(),
+                BABYLON.Vector3.Zero(),
                 this.scene
             );
             return pointLight;

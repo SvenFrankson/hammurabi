@@ -24,8 +24,10 @@ namespace Hammurabi
 				data.v[3 * i + 2] = target.vertices[i].z;
 			}
 			data.i = new int[target.triangles.Length];
-			for (int i = 0; i < target.triangles.Length; i++) {
-				data.i[i] = target.triangles[i];
+			for (int i = 0; i < target.triangles.Length / 3; i++) {
+				data.i[3 * i] = target.triangles[3 * i];
+				data.i[3 * i + 1] = target.triangles[3 * i + 2];
+				data.i[3 * i + 2] = target.triangles[3 * i + 1];
 			}
 			return data;
 		}
