@@ -30,7 +30,7 @@ class Main {
 
         let mouse = new Hammurabi.Mouse(this.scene);
 
-        await Hammurabi.Loader.LoadScene("test", this.scene);
+        await Hammurabi.Loader.LoadScene("test-2", this.scene);
         main.animate();
     }
 

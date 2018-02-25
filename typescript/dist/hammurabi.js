@@ -516,7 +516,7 @@ class Main {
             Main.scene = this.scene;
             this.resize();
             let mouse = new Hammurabi.Mouse(this.scene);
-            yield Hammurabi.Loader.LoadScene("test", this.scene);
+            yield Hammurabi.Loader.LoadScene("test-2", this.scene);
             main.animate();
         });
     }

@@ -25,14 +25,6 @@ namespace Hammurabi
         public float a;
     }
     
-    public class Mesh {
-        public string name;
-        public float[] v;
-        public int[] i;
-        public float[] n;
-        public float[] u;
-    }
-    
     public class Material {
         public string name;
         public Color color;

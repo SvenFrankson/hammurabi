@@ -55,6 +55,7 @@
      <Compile Include="Assets\Scripts\Data\CameraData.cs" />
      <Compile Include="Assets\Scripts\Data\ComponentData.cs" />
      <Compile Include="Assets\Scripts\Data\GameObjectData.cs" />
+     <Compile Include="Assets\Scripts\Data\MeshData.cs" />
      <Compile Include="Assets\Scripts\Data\QuaternionData.cs" />
      <Compile Include="Assets\Scripts\Data\SceneData.cs" />
      <Compile Include="Assets\Scripts\Data\TransformData.cs" />
