@@ -21,7 +21,7 @@ module Hammurabi {
                                 resolve(data);
                             },
                             error: () => {
-                                reject();
+                                reject("Scene " + ref + " not found");
                             }
                         }
                     );
@@ -200,7 +200,7 @@ module Hammurabi {
                                     resolve(m);
                                 },
                                 error: () => {
-                                    reject();
+                                    reject("Mesh " + ref + " not found");
                                 }
                             }
                         );
@@ -238,7 +238,7 @@ module Hammurabi {
                                     resolve(m);
                                 },
                                 error: () => {
-                                    reject();
+                                    reject("Material " + ref + " not found");
                                 }
                             }
                         );

@@ -15,6 +15,9 @@ namespace Hammurabi
 			if (target is Camera) {
                 return CameraData.CameraDataFromSource(target as Camera);
 			}
+			if (target is MeshFilter) {
+                return MeshFilterData.MeshFilterDataFromSource(target as MeshFilter);
+			}
 			return new ComponentData();
 		}
 		virtual public string ToJson() {
