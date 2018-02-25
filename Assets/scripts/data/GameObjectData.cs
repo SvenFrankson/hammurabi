@@ -4,20 +4,34 @@ using UnityEngine;
 
 namespace Hammurabi {
 
+	[System.Serializable]
     public class GameObjectData {
         public string n;
-        public List<ComponentData> c;
+        public ComponentData[] c;
 
 		public static GameObjectData GameObjectDataFromSource(GameObject source) {
+			Debug.Log("Serialize GameObject " + source.name);
 			GameObjectData data = new GameObjectData();
-			data.n = source.name;
-			data.c = new List<ComponentData>();
 			Component[] sourceComponents = source.GetComponents<Component>();
+			data.n = source.name;
+			data.c = new ComponentData[sourceComponents.Length];
 			for (int i = 0; i < sourceComponents.Length; i++) {
 				Component sourceComponent = sourceComponents[i];
-				data.c.Add(ComponentData.ComponentDataFromSource(sourceComponent));
+				data.c[i] = ComponentData.ComponentDataFromSource(sourceComponent);
 			}
 			return data;
+		}
+
+		public string ToJson() {
+			string jsonData = "{\"n\":\"" + this.n + "\",\"c\":[";
+			for (int i = 0; i < this.c.Length; i++) {
+				jsonData += this.c[i].ToJson();
+				if (i < this.c.Length - 1) {
+					jsonData += ",";
+				}
+			}
+			jsonData += "]}";
+			return jsonData;
 		}
     }
 }

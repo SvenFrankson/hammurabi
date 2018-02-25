@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{19B0EB8B-84E5-D18B-524E-7C799428F463}</ProjectGuid>
+    <ProjectGuid>{DA8E35A8-3D35-2211-E58F-45291C9A02EB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Assembly-CSharp-Editor</AssemblyName>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>Assets</BaseDirectory>
@@ -51,14 +51,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Data.cs" />
-     <Compile Include="Assets\Scripts\Data\ComponentData.cs" />
-     <Compile Include="Assets\Scripts\Data\GameObjectData.cs" />
-     <Compile Include="Assets\Scripts\Data\QuaternionData.cs" />
-     <Compile Include="Assets\Scripts\Data\SceneData.cs" />
-     <Compile Include="Assets\Scripts\Data\TransformData.cs" />
-     <Compile Include="Assets\Scripts\Data\Vector3Data.cs" />
-     <Compile Include="Assets\Scripts\Hammurabi.cs" />
+     <Compile Include="Assets\Scripts\Editor\HammurabiMenu.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>C:/Users/Sven/Documents/SvenFrankson/hammurabi/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
@@ -170,6 +163,16 @@
  <Reference Include="UnityEngine.StandardEvents">
  <HintPath>C:/Users/Sven/AppData/LocalLow/Unity/cache/packages/packages.unity.com/com.unity.standardevents@1.0.10/UnityEngine.StandardEvents.dll</HintPath>
  </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions.Xcode">
+ <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
+ </Reference>
+ <Reference Include="UnityEditor.iOS.Extensions.Common">
+ <HintPath>C:/Program Files/Unity/Editor/Data/PlaybackEngines/iOSSupport/UnityEditor.iOS.Extensions.Common.dll</HintPath>
+ </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="Assembly-CSharp.csproj">
+      <Project>{19B0EB8B-84E5-D18B-524E-7C799428F463}</Project>      <Name>Assembly-CSharp</Name>    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

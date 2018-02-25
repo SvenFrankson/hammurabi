@@ -4,38 +4,21 @@ using UnityEngine;
 
 namespace Hammurabi
 {
+    [System.Serializable]
 	public class ComponentData {
-        public string n;
-        // Transform
+        public string n = "Component";
         public Vector3Data p;
         public QuaternionData r;
-        // MeshFilter
-        public string mesh;
-        // MeshRenderer
-        public string[] materials;
-        // Light
-        public Color color;
-        public float intensity;
-        public float range;
-        public LightType lightType;
-        public float spotAngle;
-        // Colliders
-        public Vector3Data center;
-        public Vector3Data size;
-        // MonoBehaviour
-        public SerializedProperty[] properties;
 
 		public static ComponentData ComponentDataFromSource(Component target) {
-			ComponentData data = new ComponentData();
 			if (target is Transform) {
-				ComponentData.ComponentDataFromTransform(target as Transform, ref data);
+                return TransformData.TransformDataFromSource(target as Transform);
 			}
-			return data;
+			return new ComponentData();
 		}
-
-		private static void ComponentDataFromTransform(Transform target, ref ComponentData data) {
-			data.p = Vector3Data.Vector3DataFromSource(target.localPosition);
-			data.r = QuaternionData.QuaternionDataFromSource(target.localRotation);
+		virtual public string ToJson() {
+			string jsonData = "{\"n\":\"Component\"}";
+			return jsonData;
 		}
     }
 }

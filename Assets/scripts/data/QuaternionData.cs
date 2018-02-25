@@ -4,6 +4,8 @@ using UnityEngine;
 
 namespace Hammurabi
 {
+    
+    [System.Serializable]
     public class QuaternionData {
 		public float x;
 		public float y;
@@ -17,6 +19,16 @@ namespace Hammurabi
             data.z = target.z;
             data.w = target.w;
 			return data;
+		}
+		
+		public string ToJson() {
+			string jsonData = "{";
+			jsonData += "\"x\":" + this.x.ToString("0.000") + ",";
+			jsonData += "\"y\":" + this.y.ToString("0.000") + ",";
+			jsonData += "\"z\":" + this.z.ToString("0.000") + ",";
+			jsonData += "\"w\":" + this.w.ToString("0.000");
+			jsonData += "}";
+			return jsonData;
 		}
     }
 }

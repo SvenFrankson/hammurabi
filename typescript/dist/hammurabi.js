@@ -220,7 +220,6 @@ var Hammurabi;
                     newLight = this._useDirectionalLight();
                 }
                 else if (t === LightType.Point) {
-                    console.log("Add new PointLight");
                     newLight = this._usePointLight();
                 }
                 else {
