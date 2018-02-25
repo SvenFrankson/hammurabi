@@ -17,56 +17,12 @@ namespace Hammurabi
         Area = 3,
         Undefined = 4
     }
-
-	public class Vector3 {
-		public float x;
-		public float y;
-		public float z;
-    }
-    
-    public class Quaternion {
-		public float x;
-		public float y;
-		public float z;
-		public float w;
-    }
     
     public class Color {
         public float r;
         public float g;
         public float b;
         public float a;
-    }
-    
-    public class Scene {
-        public GameObjectData[] gameObjects;
-    }
-    
-    public class GameObjectData {
-        public string n;
-        public Component c;
-    }
-    
-    public class Component {
-        public string n;
-        // Transform
-        public Vector3 p;
-        public Quaternion r;
-        // MeshFilter
-        public string mesh;
-        // MeshRenderer
-        public string[] materials;
-        // Light
-        public Color color;
-        public float intensity;
-        public float range;
-        public LightType lightType;
-        public float spotAngle;
-        // Colliders
-        public Vector3 center;
-        public Vector3 size;
-        // MonoBehaviour
-        public SerializedProperty[] properties;
     }
     
     public class Mesh {

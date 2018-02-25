@@ -52,7 +52,10 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\scripts\Data.cs" />
+     <Compile Include="Assets\scripts\data\ComponentData.cs" />
      <Compile Include="Assets\scripts\data\GameObjectData.cs" />
+     <Compile Include="Assets\scripts\data\QuaternionData.cs" />
+     <Compile Include="Assets\scripts\data\Vector3Data.cs" />
  <Reference Include="Facebook.Unity.Settings">
  <HintPath>C:/Users/Sven/Documents/SvenFrankson/hammurabi/Library/FacebookSDK/Facebook.Unity.Settings.dll</HintPath>
  </Reference>
