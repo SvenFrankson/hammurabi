@@ -1,0 +1,30 @@
+{
+  "name": "hammurabi",
+  "version": "0.0.1",
+  "description": "Hammurabi makes BabylonJS library accessible through a Unity-like API.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SvenFrankson/hammurabi.git"
+  },
+  "keywords": [
+    "babylonjs",
+    "unity3d",
+    "converter"
+  ],
+  "author": "SvenFrankson",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/SvenFrankson/hammurabi/issues"
+  },
+  "homepage": "https://github.com/SvenFrankson/hammurabi#readme",
+  "dependencies": {
+    "@types/jquery": "^3.3.0",
+    "babylonjs": "^3.2.0-alpha10",
+    "jquery": "^3.3.1",
+    "typescript": "^2.7.2"
+  }
+}

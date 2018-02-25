@@ -1,0 +1,86 @@
+{
+    "gameObjects": [
+        {
+            "n": "TestCamera",
+            "c": [
+                {
+                    "n": "Transform",
+                    "p": {
+                        "x": 3, "y": 2, "z": -10
+                    },
+                    "r": {
+                        "x": 0, "y": 0, "z": 0, "w": 1
+                    }
+                },
+                {
+                    "n": "Camera"
+                }
+            ]
+        },
+        {
+            "n": "Test",
+            "c": [
+                {
+                    "n": "Transform",
+                    "p": {
+                        "x": 0, "y": 0.5, "z": 0
+                    },
+                    "r": {
+                        "x": 0, "y": 0, "z": 0, "w": 1
+                    }
+                },
+                {
+                    "n": "MeshFilter",
+                    "mesh": "test"
+                },
+                {
+                    "n": "MeshRenderer",
+                    "materials": ["test"]
+                },
+                {
+                    "n": "BoxCollider",
+                    "center": {
+                        "x": 0.25, "y": 0, "z": 0
+                    },
+                    "size": {
+                        "x": 0.5, "y": 1, "z": 1
+                    }
+                },
+                {
+                    "n": "TestMBH2",
+                    "properties": [
+                        {
+                            "k": "materialBlue",
+                            "t": 3,
+                            "v": "blue"
+                        },
+                        {
+                            "k": "materialRed",
+                            "t": 3,
+                            "v": "red"
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "n": "TestLight",
+            "c": [
+                {
+                    "n": "Transform",
+                    "p": {
+                        "x": 10, "y": 20, "z": 0
+                    },
+                    "r": {
+                        "x": 0, "y": 0, "z": 0, "w": 1
+                    }
+                },
+                {
+                    "n": "Light",
+                    "type": 2,
+                    "range": 100
+                }
+            ]
+        }
+    ]
+}
