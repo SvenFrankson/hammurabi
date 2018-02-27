@@ -34,6 +34,7 @@ module Hammurabi {
         // Transform
         p?: IVector3;
         r?: IQuaternion;
+        s?: IVector3;
         // MeshFilter
         mesh?: string;
         // MeshRenderer

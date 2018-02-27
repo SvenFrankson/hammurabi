@@ -118,7 +118,7 @@ module Hammurabi {
     
         private _syncLightTransform = () => {
             if (this._lightInstance instanceof BABYLON.DirectionalLight) {
-                this.gameObject.getDirectionToRef(BABYLON.Axis.Y, this._lightInstance.direction);
+                this.gameObject.getDirectionToRef(BABYLON.Axis.Z, this._lightInstance.direction);
             }
         }
     }

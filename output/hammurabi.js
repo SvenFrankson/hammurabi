@@ -172,7 +172,7 @@ var Hammurabi;
             this._spotAngle = 90;
             this._syncLightTransform = () => {
                 if (this._lightInstance instanceof BABYLON.DirectionalLight) {
-                    this.gameObject.getDirectionToRef(BABYLON.Axis.Y, this._lightInstance.direction);
+                    this.gameObject.getDirectionToRef(BABYLON.Axis.Z, this._lightInstance.direction);
                 }
             };
             this.name = "Light";
@@ -372,6 +372,7 @@ var Hammurabi;
         static _setTransformAt(data, target) {
             target.localPosition.copyFromFloats(data.p.x, data.p.y, data.p.z);
             target.localRotation.copyFromFloats(data.r.x, data.r.y, data.r.z, data.r.w);
+            target.localScale.copyFromFloats(data.s.x, data.s.y, data.s.z);
         }
         static _setMeshFilterAt(data, target) {
             target.mesh = Hammurabi.Mesh.references.get(data.mesh);
@@ -709,6 +710,12 @@ var Hammurabi;
         }
         set localRotation(r) {
             this.gameObject.rotationQuaternion = r;
+        }
+        get localScale() {
+            return this.gameObject.scaling;
+        }
+        set localScale(s) {
+            this.gameObject.scaling = s;
         }
     }
     Hammurabi.Transform = Transform;

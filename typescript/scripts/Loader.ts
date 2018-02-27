@@ -129,6 +129,11 @@ module Hammurabi {
                 data.r.z,
                 data.r.w
             );
+            target.localScale.copyFromFloats(
+                data.s.x,
+                data.s.y,
+                data.s.z
+            );
         }
     
         private static _setMeshFilterAt(data: IComponent, target: MeshFilter): void {

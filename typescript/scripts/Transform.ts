@@ -16,12 +16,20 @@ module Hammurabi {
             this.gameObject.position = p;
         }
     
-        public get localRotation(): BABYLON.Nullable<BABYLON.Quaternion> {
+        public get localRotation(): BABYLON.Quaternion {
             return this.gameObject.rotationQuaternion;
         }
     
-        public set localRotation(r: BABYLON.Nullable<BABYLON.Quaternion>) {
+        public set localRotation(r: BABYLON.Quaternion) {
             this.gameObject.rotationQuaternion = r;
+        }
+    
+        public get localScale(): BABYLON.Vector3 {
+            return this.gameObject.scaling;
+        }
+    
+        public set localScale(s: BABYLON.Vector3) {
+            this.gameObject.scaling = s;
         }
     }
 }
