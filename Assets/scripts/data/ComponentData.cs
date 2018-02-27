@@ -21,8 +21,12 @@ namespace Hammurabi
 			if (target is MeshFilter) {
                 return MeshFilterData.MeshFilterDataFromSource(target as MeshFilter);
 			}
+			if (target is MonoBehaviour) {
+                return MonoBehaviourData.MonoBehaviourDataFromSource(target as MonoBehaviour);
+			}
 			return new ComponentData();
 		}
+		
 		virtual public string ToJson() {
 			return null;
 		}
