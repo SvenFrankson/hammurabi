@@ -32,7 +32,7 @@ namespace Hammurabi
 
         public SerializedProperty[] properties;
 
-		public static MonoBehaviourData MonoBehaviourDataFromSource(MonoBehaviour target) {
+		public static MonoBehaviourData MonoBehaviourDataFromSource(MonoBehaviour target, Hammurabi serializer) {
 			Debug.Log("Serialize MonoBehaviour");
 			MonoBehaviourData data = new MonoBehaviourData();
             data.n = "MonoBehaviour";
@@ -49,6 +49,7 @@ namespace Hammurabi
                 }
                 else if (unityProperty.type == "PPtr<MonoScript>") {
                     MonoScript script = unityProperty.objectReferenceValue as MonoScript;
+                    serializer.LinkScript(script);
                     data.n = script.name;
                 }
             }

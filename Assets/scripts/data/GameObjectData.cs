@@ -9,7 +9,7 @@ namespace Hammurabi {
         public string n;
         public ComponentData[] c;
 
-		public static GameObjectData GameObjectDataFromSource(GameObject source) {
+		public static GameObjectData GameObjectDataFromSource(GameObject source, Hammurabi serializer) {
 			Debug.Log("Serialize GameObject " + source.name);
 			GameObjectData data = new GameObjectData();
 			Component[] sourceComponents = source.GetComponents<Component>();
@@ -17,7 +17,7 @@ namespace Hammurabi {
 			data.c = new ComponentData[sourceComponents.Length];
 			for (int i = 0; i < sourceComponents.Length; i++) {
 				Component sourceComponent = sourceComponents[i];
-				data.c[i] = ComponentData.ComponentDataFromSource(sourceComponent);
+				data.c[i] = ComponentData.ComponentDataFromSource(sourceComponent, serializer);
 			}
 			return data;
 		}

@@ -15,8 +15,10 @@ namespace Hammurabi {
         void OnGUI()
         {
             if (GUILayout.Button("Convert")) {
-                Hammurabi.SaveCurrentScene();
-                Hammurabi.SaveLinkedMeshes();
+                Hammurabi serializer = new Hammurabi();
+                serializer.SaveCurrentScene();
+                serializer.SaveLinkedMeshes();
+                serializer.SaveLinkedScripts();
             }
         }
     }

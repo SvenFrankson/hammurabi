@@ -9,13 +9,13 @@ namespace Hammurabi {
     public class SceneData {
         public GameObjectData[] gameObjects;
 
-		public static SceneData SceneDataFromSource(Scene source) {
+		public static SceneData SceneDataFromSource(Scene source, Hammurabi serializer) {
 			SceneData data = new SceneData();
             GameObject[] sourceGameObjects = source.GetRootGameObjects();
             data.gameObjects = new GameObjectData[sourceGameObjects.Length];
 			for (int i = 0; i < sourceGameObjects.Length; i++) {
 				GameObject sourceGameObject = sourceGameObjects[i];
-				data.gameObjects[i] = GameObjectData.GameObjectDataFromSource(sourceGameObject);
+				data.gameObjects[i] = GameObjectData.GameObjectDataFromSource(sourceGameObject, serializer);
 			}
 			return data;
 		}

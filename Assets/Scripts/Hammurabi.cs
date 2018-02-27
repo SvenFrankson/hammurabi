@@ -2,13 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEditor;
 using System.IO;
 
 namespace Hammurabi {  
     public class Hammurabi {
-        public static void SaveCurrentScene() {
+
+        private List<MonoScript> _linkedScripts;
+
+        public Hammurabi() {
+            this._linkedScripts = new List<MonoScript>();
+        }
+
+        public void SaveCurrentScene() {
 			Scene scene = SceneManager.GetActiveScene();
-            SceneData data = SceneData.SceneDataFromSource(scene);
+            SceneData data = SceneData.SceneDataFromSource(scene, this);
             string jsonData = data.ToJson();
             string path = Application.dataPath;
             path += "/../output/";
@@ -22,7 +30,7 @@ namespace Hammurabi {
             writer.Close();
 		}
 
-        public static void SaveLinkedMeshes() {
+        public void SaveLinkedMeshes() {
 			MeshFilter[] meshFilters = MeshFilter.FindObjectsOfType<MeshFilter>();
             List<Mesh> meshes = new List<Mesh>();
             for (int i = 0; i < meshFilters.Length; i++) {
@@ -46,6 +54,27 @@ namespace Hammurabi {
                 }
                 StreamWriter writer = new StreamWriter(path);
                 writer.Write(jsonData);
+                writer.Close();
+            }
+        }
+
+        public void LinkScript(MonoScript script) {
+            if (!this._linkedScripts.Contains(script)) {
+                this._linkedScripts.Add(script);
+            }
+        }
+
+        public void SaveLinkedScripts() {
+            for (int i = 0; i < this._linkedScripts.Count; i++) {
+                string path = Application.dataPath;
+                path += "/../output/scripts/";
+                Directory.CreateDirectory(path);
+                path += this._linkedScripts[i].name + ".ts.new";
+                if (File.Exists(path)) {
+                    File.Delete(path);
+                }
+                StreamWriter writer = new StreamWriter(path);
+                writer.Write(this._linkedScripts[i].text);
                 writer.Close();
             }
         }

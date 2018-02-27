@@ -8,7 +8,7 @@ namespace Hammurabi
 	public class ComponentData {
         public string n = "Component";
 
-		public static ComponentData ComponentDataFromSource(Component target) {
+		public static ComponentData ComponentDataFromSource(Component target, Hammurabi serializer) {
 			if (target is Transform) {
                 return TransformData.TransformDataFromSource(target as Transform);
 			}
@@ -22,7 +22,7 @@ namespace Hammurabi
                 return MeshFilterData.MeshFilterDataFromSource(target as MeshFilter);
 			}
 			if (target is MonoBehaviour) {
-                return MonoBehaviourData.MonoBehaviourDataFromSource(target as MonoBehaviour);
+                return MonoBehaviourData.MonoBehaviourDataFromSource(target as MonoBehaviour, serializer);
 			}
 			return new ComponentData();
 		}
