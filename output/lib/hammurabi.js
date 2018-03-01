@@ -51,8 +51,8 @@ var Hammurabi;
     class BoxCollider extends Hammurabi.Collider {
         constructor(gameObject) {
             super(gameObject);
-            this.center = BABYLON.Vector3.Zero();
-            this.size = new BABYLON.Vector3(1, 1, 1);
+            this.center = Hammurabi.Vector3.Zero();
+            this.size = new Hammurabi.Vector3(1, 1, 1);
             this.name = "BoxCollider";
         }
         intersectsRay(ray) {
@@ -145,6 +145,21 @@ var Hammurabi;
         }
     }
     Hammurabi.GameObject = GameObject;
+})(Hammurabi || (Hammurabi = {}));
+var Hammurabi;
+(function (Hammurabi) {
+    class Input {
+        static GetKey(name) {
+            return Hammurabi.Scene.Instance.keyboard.keyPressed.indexOf(name) !== -1;
+        }
+        static GetKeyDown(name) {
+            return Hammurabi.Scene.Instance.keyboard.keyDowned.indexOf(name) !== -1;
+        }
+        static GetKeyUp(name) {
+            return Hammurabi.Scene.Instance.keyboard.keyUped.indexOf(name) !== -1;
+        }
+    }
+    Hammurabi.Input = Input;
 })(Hammurabi || (Hammurabi = {}));
 var Hammurabi;
 (function (Hammurabi) {
@@ -656,10 +671,77 @@ var Hammurabi;
 })(Hammurabi || (Hammurabi = {}));
 var Hammurabi;
 (function (Hammurabi) {
+    class Quaternion extends BABYLON.Vector3 {
+    }
+    Hammurabi.Quaternion = Quaternion;
+})(Hammurabi || (Hammurabi = {}));
+var Hammurabi;
+(function (Hammurabi) {
+    class RigidBody extends Hammurabi.Component {
+        constructor(gameObject) {
+            super(gameObject);
+            this.weight = 1;
+            this.name = "RigidBody";
+            this._registerStart();
+        }
+        _registerStart() {
+            let observer = this.scene.onBeforeRenderObservable.add(() => {
+                let collider = this.GetComponent(Hammurabi.BoxCollider);
+                if (collider) {
+                    let bodyInstanceProperties = {
+                        type: "box",
+                        size: collider.size.asArray(),
+                        pos: this.gameObject.transform.localPosition.asArray(),
+                        rot: this.gameObject.transform.localRotation.toEulerAngles().asArray(),
+                        move: true,
+                        density: this.weight / (collider.size.x * collider.size.y * collider.size.z),
+                        friction: 0.2,
+                        restitution: 0.2,
+                        belongsTo: 1,
+                        collidesWith: 0xffffffff
+                    };
+                    this._bodyInstance = this.scene.physicWorld.add(bodyInstanceProperties);
+                    this._registerUpdate();
+                }
+                this.scene.onBeforeRenderObservable.remove(observer);
+            });
+        }
+        _registerUpdate() {
+            let observer = this.scene.onBeforeRenderObservable.add(() => {
+                if (this._bodyInstance) {
+                    let bodyInstancePosition = this._bodyInstance.getPosition();
+                    let bodyInstanceRotation = this._bodyInstance.getQuaternion();
+                    if (bodyInstancePosition && bodyInstanceRotation) {
+                        this.gameObject.transform.localPosition.copyFromFloats(bodyInstancePosition.x, bodyInstancePosition.y, bodyInstancePosition.z);
+                        this.gameObject.transform.localRotation.copyFromFloats(bodyInstanceRotation.x, bodyInstanceRotation.y, bodyInstanceRotation.z, bodyInstanceRotation.w);
+                    }
+                }
+            });
+        }
+    }
+    Hammurabi.RigidBody = RigidBody;
+})(Hammurabi || (Hammurabi = {}));
+var Hammurabi;
+(function (Hammurabi) {
     class Scene extends BABYLON.Scene {
-        constructor() {
-            super(...arguments);
+        constructor(engine) {
+            super(engine);
             this.colliders = [];
+            Scene.Instance = this;
+            this.mouse = new Hammurabi.Mouse(this);
+            this.keyboard = new Hammurabi.KeyBoard(this);
+            this.physicWorld = new OIMO.World({
+                timestep: 1 / 60,
+                iterations: 8,
+                broadphase: 1,
+                worldscale: 1,
+                random: true,
+                info: false,
+                gravity: [0, -9.8, 0]
+            });
+            this.registerBeforeRender(() => {
+                this.physicWorld.step();
+            });
         }
     }
     Hammurabi.Scene = Scene;
@@ -695,6 +777,12 @@ var Hammurabi;
 })(Hammurabi || (Hammurabi = {}));
 var Hammurabi;
 (function (Hammurabi) {
+    class Vector3 extends BABYLON.Vector3 {
+    }
+    Hammurabi.Vector3 = Vector3;
+})(Hammurabi || (Hammurabi = {}));
+var Hammurabi;
+(function (Hammurabi) {
     class ColorUtils {
         static Color3ToIColor(c) {
             return new BABYLON.Color4(c.r, c.g, c.b, 1);
@@ -704,6 +792,40 @@ var Hammurabi;
         }
     }
     Hammurabi.ColorUtils = ColorUtils;
+})(Hammurabi || (Hammurabi = {}));
+var Hammurabi;
+(function (Hammurabi) {
+    class KeyBoard {
+        constructor(scene) {
+            this.keyDowned = [];
+            this.keyPressed = [];
+            this.keyUped = [];
+            this._keyDown = (event) => {
+                let index = this.keyPressed.indexOf(event.key);
+                if (index === -1) {
+                    this.keyDowned.push(event.key);
+                    this.keyPressed.push(event.key);
+                }
+            };
+            this._keyUp = (event) => {
+                this.keyUped.push(event.key);
+                let index = this.keyPressed.indexOf(event.key);
+                if (index !== -1) {
+                    this.keyPressed.splice(index, 1);
+                }
+            };
+            this._clear = () => {
+                this.keyDowned.length = 0;
+                this.keyUped.length = 0;
+            };
+            this.scene = scene;
+            this.canvas = scene.getEngine().getRenderingCanvas();
+            this.canvas.addEventListener("keydown", this._keyDown);
+            this.canvas.addEventListener("keyup", this._keyUp);
+            this.scene.onAfterRenderObservable.add(this._clear);
+        }
+    }
+    Hammurabi.KeyBoard = KeyBoard;
 })(Hammurabi || (Hammurabi = {}));
 var Hammurabi;
 (function (Hammurabi) {
@@ -780,13 +902,13 @@ var Hammurabi;
         }
         static Position(p) {
             if (p && isFinite(p.x + p.y + p.z)) {
-                return p;
+                return new BABYLON.Vector3(p.x, p.y, p.z);
             }
             return new BABYLON.Vector3(0, 0, 0);
         }
         static Size(s) {
             if (s && isFinite(s.x + s.y + s.z)) {
-                return s;
+                return new BABYLON.Vector3(s.x, s.y, s.z);
             }
             return new BABYLON.Vector3(1, 1, 1);
         }

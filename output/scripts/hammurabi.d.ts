@@ -20,8 +20,8 @@ declare module Hammurabi {
 }
 declare module Hammurabi {
     class BoxCollider extends Collider {
-        center: IVector3;
-        size: IVector3;
+        center: Vector3;
+        size: Vector3;
         constructor(gameObject: GameObject);
         intersectsRay(ray: BABYLON.Ray): number;
         triggerMouseDown(): void;
@@ -43,6 +43,13 @@ declare module Hammurabi {
         AddComponent<T extends Component>(TConstructor: new (gameObject: GameObject) => T): T;
         GetComponent<T extends Component>(TConstructor: new (gameObject: GameObject) => T): BABYLON.Nullable<T>;
         GetComponents<T extends Component>(TConstructor: new (gameObject: GameObject) => T): T[];
+    }
+}
+declare module Hammurabi {
+    class Input {
+        static GetKey(name: string): boolean;
+        static GetKeyDown(name: string): boolean;
+        static GetKeyUp(name: string): boolean;
     }
 }
 declare module Hammurabi {
@@ -212,8 +219,26 @@ declare module Hammurabi {
     }
 }
 declare module Hammurabi {
+    class Quaternion extends BABYLON.Vector3 {
+    }
+}
+declare module Hammurabi {
+    class RigidBody extends Component {
+        private _bodyInstance;
+        weight: number;
+        constructor(gameObject: GameObject);
+        private _registerStart();
+        private _registerUpdate();
+    }
+}
+declare module Hammurabi {
     class Scene extends BABYLON.Scene {
+        static Instance: Scene;
+        mouse: Mouse;
+        keyboard: KeyBoard;
         colliders: Collider[];
+        physicWorld: OIMO.World;
+        constructor(engine: BABYLON.Engine);
     }
 }
 declare module Hammurabi {
@@ -225,9 +250,26 @@ declare module Hammurabi {
     }
 }
 declare module Hammurabi {
+    class Vector3 extends BABYLON.Vector3 {
+    }
+}
+declare module Hammurabi {
     class ColorUtils {
         static Color3ToIColor(c: BABYLON.Color3): IColor;
         static IColorToColor3(c: IColor): BABYLON.Color3;
+    }
+}
+declare module Hammurabi {
+    class KeyBoard {
+        canvas: HTMLCanvasElement;
+        scene: Scene;
+        keyDowned: string[];
+        keyPressed: string[];
+        keyUped: string[];
+        constructor(scene: Scene);
+        private _keyDown;
+        private _keyUp;
+        private _clear;
     }
 }
 declare module Hammurabi {
@@ -250,8 +292,8 @@ declare module Hammurabi {
         static Number(v: number): number;
         static Ratio(v: number): number;
         static Angle(v: number): number;
-        static Position(p: IVector3): IVector3;
-        static Size(s: IVector3): IVector3;
+        static Position(p: IVector3): Vector3;
+        static Size(s: IVector3): Vector3;
         static Color(c: IColor): IColor;
         static LightType(t: LightType): LightType;
     }
