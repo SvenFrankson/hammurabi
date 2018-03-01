@@ -4,8 +4,8 @@ module Hammurabi {
 
     export class BoxCollider extends Collider {
     
-        public center: IVector3 = BABYLON.Vector3.Zero();
-        public size: IVector3 = new BABYLON.Vector3(1, 1, 1);
+        public center: Vector3 = Vector3.Zero();
+        public size: Vector3 = new Vector3(1, 1, 1);
     
         constructor(gameObject: GameObject) {
             super(gameObject);

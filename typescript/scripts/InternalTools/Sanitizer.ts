@@ -23,16 +23,16 @@ module Hammurabi {
             return 60;
         }
     
-        public static Position(p: IVector3): IVector3 {
+        public static Position(p: IVector3): Vector3 {
             if (p && isFinite(p.x + p.y + p.z)) {
-                return p;
+                return new BABYLON.Vector3(p.x, p.y, p.z);
             }
             return new BABYLON.Vector3(0, 0, 0);
         }
     
-        public static Size(s: IVector3): IVector3 {
+        public static Size(s: IVector3): Vector3 {
             if (s && isFinite(s.x + s.y + s.z)) {
-                return s;
+                return new BABYLON.Vector3(s.x, s.y, s.z);
             }
             return new BABYLON.Vector3(1, 1, 1);
         }
