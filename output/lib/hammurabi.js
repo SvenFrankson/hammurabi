@@ -512,8 +512,6 @@ class Main {
             Main.ComponentConstructors.set("Camera", Hammurabi.Camera);
             Main.ComponentConstructors.set("Light", Hammurabi.Light);
             Main.ComponentConstructors.set("BoxCollider", Hammurabi.BoxCollider);
-            Main.ComponentConstructors.set("TestMBH", TestMBH);
-            Main.ComponentConstructors.set("TestMBH2", TestMBH2);
             this.scene = new Hammurabi.Scene(this.engine);
             this.scene.clearColor.copyFromFloats(0.9, 0.9, 0.9, 1);
             Main.scene = this.scene;
@@ -666,31 +664,6 @@ var Hammurabi;
     }
     Hammurabi.Scene = Scene;
 })(Hammurabi || (Hammurabi = {}));
-class TestMBH extends Hammurabi.MonoBehaviour {
-    constructor() {
-        super(...arguments);
-        this.speed = 0.01;
-    }
-    Update() {
-        this.transform.localPosition = this.transform.localPosition.add(new BABYLON.Vector3(this.speed, 0, 0));
-    }
-    OnMouseDown() {
-        console.log("v");
-    }
-    OnMouseUp() {
-        console.log("^");
-    }
-}
-class TestMBH2 extends Hammurabi.MonoBehaviour {
-    Update() {
-    }
-    OnMouseDown() {
-        this.GetComponent(Hammurabi.MeshRenderer).material = this.materialRed;
-    }
-    OnMouseUp() {
-        this.GetComponent(Hammurabi.MeshRenderer).material = this.materialBlue;
-    }
-}
 var Hammurabi;
 (function (Hammurabi) {
     class Transform extends Hammurabi.Component {

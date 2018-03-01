@@ -21,8 +21,6 @@ class Main {
         Main.ComponentConstructors.set("Camera", Hammurabi.Camera);
         Main.ComponentConstructors.set("Light", Hammurabi.Light);
         Main.ComponentConstructors.set("BoxCollider", Hammurabi.BoxCollider);
-        Main.ComponentConstructors.set("TestMBH", TestMBH);
-        Main.ComponentConstructors.set("TestMBH2", TestMBH2);
         this.scene = new Hammurabi.Scene(this.engine);
         this.scene.clearColor.copyFromFloats(0.9, 0.9, 0.9, 1);
         Main.scene = this.scene;
