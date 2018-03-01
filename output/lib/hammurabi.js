@@ -8,107 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 var Hammurabi;
 (function (Hammurabi) {
-    class Component {
-        constructor(gameObject) {
-            this.gameObject = gameObject;
-        }
-        get scene() {
-            return this.gameObject.scene;
-        }
-        get transform() {
-            return this.gameObject.transform;
-        }
-        GetComponent(TConstructor) {
-            return this.gameObject.GetComponent(TConstructor);
-        }
-        GetComponents(TConstructor) {
-            return this.gameObject.GetComponents(TConstructor);
-        }
-    }
-    Hammurabi.Component = Component;
-})(Hammurabi || (Hammurabi = {}));
-///<reference path="./Component.ts" />
-var Hammurabi;
-(function (Hammurabi) {
-    class Collider extends Hammurabi.Component {
-        constructor(gameObject) {
-            super(gameObject);
-            this.name = "Collider";
-            this.scene.colliders.push(this);
-        }
-        destroy() {
-            let index = this.scene.colliders.indexOf(this);
-            if (index !== -1) {
-                this.scene.colliders.splice(index, 1);
-            }
-        }
-    }
-    Hammurabi.Collider = Collider;
-})(Hammurabi || (Hammurabi = {}));
-///<reference path="./Collider.ts" />
-var Hammurabi;
-(function (Hammurabi) {
-    class BoxCollider extends Hammurabi.Collider {
-        constructor(gameObject) {
-            super(gameObject);
-            this.center = Hammurabi.Vector3.Zero();
-            this.size = new Hammurabi.Vector3(1, 1, 1);
-            this.name = "BoxCollider";
-        }
-        intersectsRay(ray) {
-            let matrix = this.gameObject.getWorldMatrix().clone();
-            let thisMatrix = BABYLON.Matrix.Translation(this.center.x, this.center.y, this.center.z);
-            let worldMatrix = thisMatrix.multiply(matrix);
-            worldMatrix = worldMatrix.invert();
-            ray = BABYLON.Ray.Transform(ray, worldMatrix);
-            let dirfrac = BABYLON.Vector3.Zero();
-            dirfrac.x = 1.0 / ray.direction.x;
-            dirfrac.y = 1.0 / ray.direction.y;
-            dirfrac.z = 1.0 / ray.direction.z;
-            let t1 = (-this.size.x * 0.5 - ray.origin.x) * dirfrac.x;
-            let t2 = (this.size.x * 0.5 - ray.origin.x) * dirfrac.x;
-            let t3 = (-this.size.y * 0.5 - ray.origin.y) * dirfrac.y;
-            let t4 = (this.size.y * 0.5 - ray.origin.y) * dirfrac.y;
-            let t5 = (-this.size.z * 0.5 - ray.origin.z) * dirfrac.z;
-            let t6 = (this.size.z * 0.5 - ray.origin.z) * dirfrac.z;
-            let tmin = Math.max(Math.max(Math.min(t1, t2), Math.min(t3, t4)), Math.min(t5, t6));
-            let tmax = Math.min(Math.min(Math.max(t1, t2), Math.max(t3, t4)), Math.max(t5, t6));
-            if (tmax < 0) {
-                return -1;
-            }
-            if (tmin > tmax) {
-                return -1;
-            }
-            return tmin;
-        }
-        triggerMouseDown() {
-            this.GetComponents(Hammurabi.MonoBehaviour).forEach((m) => {
-                m.OnMouseDown();
-            });
-        }
-        triggerMouseUp() {
-            this.GetComponents(Hammurabi.MonoBehaviour).forEach((m) => {
-                m.OnMouseUp();
-            });
-        }
-    }
-    Hammurabi.BoxCollider = BoxCollider;
-})(Hammurabi || (Hammurabi = {}));
-///<reference path="./Component.ts" />
-var Hammurabi;
-(function (Hammurabi) {
-    class Camera extends Hammurabi.Component {
-        constructor(gameObject) {
-            super(gameObject);
-            this.name = "Camera";
-            this._cameraInstance = new BABYLON.Camera("_cameraInstance", BABYLON.Vector3.Zero(), gameObject.scene);
-            this._cameraInstance.parent = this.gameObject;
-        }
-    }
-    Hammurabi.Camera = Camera;
-})(Hammurabi || (Hammurabi = {}));
-var Hammurabi;
-(function (Hammurabi) {
     class GameObject extends BABYLON.Mesh {
         constructor(scene) {
             super("GameObject", scene);
@@ -170,107 +69,6 @@ var Hammurabi;
         SerializablePropertyType[SerializablePropertyType["Mesh"] = 2] = "Mesh";
         SerializablePropertyType[SerializablePropertyType["Material"] = 3] = "Material";
     })(SerializablePropertyType = Hammurabi.SerializablePropertyType || (Hammurabi.SerializablePropertyType = {}));
-})(Hammurabi || (Hammurabi = {}));
-var Hammurabi;
-(function (Hammurabi) {
-    let LightType;
-    (function (LightType) {
-        LightType[LightType["Spot"] = 0] = "Spot";
-        LightType[LightType["Directional"] = 1] = "Directional";
-        LightType[LightType["Point"] = 2] = "Point";
-        LightType[LightType["Area"] = 3] = "Area";
-        LightType[LightType["Undefined"] = 4] = "Undefined";
-    })(LightType = Hammurabi.LightType || (Hammurabi.LightType = {}));
-    class Light extends Hammurabi.Component {
-        constructor(gameObject) {
-            super(gameObject);
-            this._spotAngle = 90;
-            this._syncLightTransform = () => {
-                if (this._lightInstance instanceof BABYLON.DirectionalLight) {
-                    this.gameObject.getDirectionToRef(BABYLON.Axis.Z, this._lightInstance.direction);
-                }
-            };
-            this.name = "Light";
-            this._lightInstance = this._useDirectionalLight();
-            this._lightInstance.parent = gameObject;
-            this.scene.onBeforeRenderObservable.add(this._syncLightTransform);
-        }
-        get color() {
-            return Hammurabi.ColorUtils.Color3ToIColor(this._lightInstance.diffuse);
-        }
-        set color(c) {
-            this._lightInstance.diffuse = Hammurabi.ColorUtils.IColorToColor3(c);
-        }
-        get intensity() {
-            return this._lightInstance.intensity;
-        }
-        set intensity(v) {
-            this._lightInstance.intensity = v;
-        }
-        get range() {
-            return this._lightInstance.range;
-        }
-        set range(v) {
-            this._lightInstance.range = v;
-        }
-        get type() {
-            if (this._lightInstance instanceof BABYLON.SpotLight) {
-                return LightType.Spot;
-            }
-            if (this._lightInstance instanceof BABYLON.DirectionalLight) {
-                return LightType.Directional;
-            }
-            if (this._lightInstance instanceof BABYLON.PointLight) {
-                return LightType.Point;
-            }
-            return LightType.Undefined;
-        }
-        set type(t) {
-            if (t !== this.type) {
-                let newLight;
-                if (t === LightType.Spot) {
-                    newLight = this._useSpotLight();
-                }
-                else if (t === LightType.Directional || t === LightType.Area) {
-                    newLight = this._useDirectionalLight();
-                }
-                else if (t === LightType.Point) {
-                    newLight = this._usePointLight();
-                }
-                else {
-                    newLight = this._usePointLight();
-                }
-                newLight.parent = this.gameObject;
-                newLight.diffuse = Hammurabi.ColorUtils.IColorToColor3(this.color);
-                newLight.intensity = this.intensity;
-                newLight.range = this.range;
-                this._lightInstance.dispose();
-                this._lightInstance = newLight;
-            }
-        }
-        get spotAngle() {
-            return this._spotAngle;
-        }
-        set spotAngle(v) {
-            this._spotAngle = v;
-            if (this._lightInstance instanceof BABYLON.SpotLight) {
-                this._lightInstance.angle = v / 180 * Math.PI;
-            }
-        }
-        _useSpotLight() {
-            let spotLight = new BABYLON.SpotLight("light_instance", BABYLON.Vector3.Zero(), BABYLON.Vector3.Up(), this.spotAngle / 180 * Math.PI, 1, this.scene);
-            return spotLight;
-        }
-        _useDirectionalLight() {
-            let directionalLight = new BABYLON.DirectionalLight("light_instance", BABYLON.Vector3.Up(), this.scene);
-            return directionalLight;
-        }
-        _usePointLight() {
-            let pointLight = new BABYLON.PointLight("light_instance", BABYLON.Vector3.Zero(), this.scene);
-            return pointLight;
-        }
-    }
-    Hammurabi.Light = Light;
 })(Hammurabi || (Hammurabi = {}));
 /// <reference path="../node_modules/@types/jquery/index.d.ts"/>
 var Hammurabi;
@@ -526,12 +324,12 @@ class Main {
             Main.ComponentConstructors.set("MeshRenderer", Hammurabi.MeshRenderer);
             Main.ComponentConstructors.set("Camera", Hammurabi.Camera);
             Main.ComponentConstructors.set("Light", Hammurabi.Light);
+            Main.ComponentConstructors.set("RigidBody", Hammurabi.RigidBody);
             Main.ComponentConstructors.set("BoxCollider", Hammurabi.BoxCollider);
             this.scene = new Hammurabi.Scene(this.engine);
             this.scene.clearColor.copyFromFloats(0.9, 0.9, 0.9, 1);
             Main.scene = this.scene;
             this.resize();
-            let mouse = new Hammurabi.Mouse(this.scene);
             yield Hammurabi.Loader.LoadScene("test", this.scene);
             main.animate();
         });
@@ -580,6 +378,245 @@ var Hammurabi;
     }
     Mesh.references = new Map();
     Hammurabi.Mesh = Mesh;
+})(Hammurabi || (Hammurabi = {}));
+var Hammurabi;
+(function (Hammurabi) {
+    class Quaternion extends BABYLON.Vector3 {
+    }
+    Hammurabi.Quaternion = Quaternion;
+})(Hammurabi || (Hammurabi = {}));
+var Hammurabi;
+(function (Hammurabi) {
+    class Scene extends BABYLON.Scene {
+        constructor(engine) {
+            super(engine);
+            this.colliders = [];
+            Scene.Instance = this;
+            this.mouse = new Hammurabi.Mouse(this);
+            this.keyboard = new Hammurabi.KeyBoard(this);
+            this.physicWorld = new OIMO.World({
+                timestep: 1 / 60,
+                iterations: 8,
+                broadphase: 1,
+                worldscale: 1,
+                random: true,
+                info: false,
+                gravity: [0, -9.8, 0]
+            });
+            this.registerBeforeRender(() => {
+                this.physicWorld.step();
+            });
+        }
+    }
+    Hammurabi.Scene = Scene;
+})(Hammurabi || (Hammurabi = {}));
+var Hammurabi;
+(function (Hammurabi) {
+    class Vector3 extends BABYLON.Vector3 {
+    }
+    Hammurabi.Vector3 = Vector3;
+})(Hammurabi || (Hammurabi = {}));
+var Hammurabi;
+(function (Hammurabi) {
+    class Component {
+        constructor(gameObject) {
+            this.gameObject = gameObject;
+        }
+        get scene() {
+            return this.gameObject.scene;
+        }
+        get transform() {
+            return this.gameObject.transform;
+        }
+        GetComponent(TConstructor) {
+            return this.gameObject.GetComponent(TConstructor);
+        }
+        GetComponents(TConstructor) {
+            return this.gameObject.GetComponents(TConstructor);
+        }
+    }
+    Hammurabi.Component = Component;
+})(Hammurabi || (Hammurabi = {}));
+///<reference path="./Component.ts" />
+var Hammurabi;
+(function (Hammurabi) {
+    class Collider extends Hammurabi.Component {
+        constructor(gameObject) {
+            super(gameObject);
+            this.name = "Collider";
+            this.scene.colliders.push(this);
+        }
+        destroy() {
+            let index = this.scene.colliders.indexOf(this);
+            if (index !== -1) {
+                this.scene.colliders.splice(index, 1);
+            }
+        }
+    }
+    Hammurabi.Collider = Collider;
+})(Hammurabi || (Hammurabi = {}));
+///<reference path="./Collider.ts" />
+var Hammurabi;
+(function (Hammurabi) {
+    class BoxCollider extends Hammurabi.Collider {
+        constructor(gameObject) {
+            super(gameObject);
+            this.center = Hammurabi.Vector3.Zero();
+            this.size = new Hammurabi.Vector3(1, 1, 1);
+            this.name = "BoxCollider";
+        }
+        intersectsRay(ray) {
+            let matrix = this.gameObject.getWorldMatrix().clone();
+            let thisMatrix = BABYLON.Matrix.Translation(this.center.x, this.center.y, this.center.z);
+            let worldMatrix = thisMatrix.multiply(matrix);
+            worldMatrix = worldMatrix.invert();
+            ray = BABYLON.Ray.Transform(ray, worldMatrix);
+            let dirfrac = BABYLON.Vector3.Zero();
+            dirfrac.x = 1.0 / ray.direction.x;
+            dirfrac.y = 1.0 / ray.direction.y;
+            dirfrac.z = 1.0 / ray.direction.z;
+            let t1 = (-this.size.x * 0.5 - ray.origin.x) * dirfrac.x;
+            let t2 = (this.size.x * 0.5 - ray.origin.x) * dirfrac.x;
+            let t3 = (-this.size.y * 0.5 - ray.origin.y) * dirfrac.y;
+            let t4 = (this.size.y * 0.5 - ray.origin.y) * dirfrac.y;
+            let t5 = (-this.size.z * 0.5 - ray.origin.z) * dirfrac.z;
+            let t6 = (this.size.z * 0.5 - ray.origin.z) * dirfrac.z;
+            let tmin = Math.max(Math.max(Math.min(t1, t2), Math.min(t3, t4)), Math.min(t5, t6));
+            let tmax = Math.min(Math.min(Math.max(t1, t2), Math.max(t3, t4)), Math.max(t5, t6));
+            if (tmax < 0) {
+                return -1;
+            }
+            if (tmin > tmax) {
+                return -1;
+            }
+            return tmin;
+        }
+        triggerMouseDown() {
+            this.GetComponents(Hammurabi.MonoBehaviour).forEach((m) => {
+                m.OnMouseDown();
+            });
+        }
+        triggerMouseUp() {
+            this.GetComponents(Hammurabi.MonoBehaviour).forEach((m) => {
+                m.OnMouseUp();
+            });
+        }
+    }
+    Hammurabi.BoxCollider = BoxCollider;
+})(Hammurabi || (Hammurabi = {}));
+///<reference path="./Component.ts" />
+var Hammurabi;
+(function (Hammurabi) {
+    class Camera extends Hammurabi.Component {
+        constructor(gameObject) {
+            super(gameObject);
+            this.name = "Camera";
+            this._cameraInstance = new BABYLON.Camera("_cameraInstance", BABYLON.Vector3.Zero(), gameObject.scene);
+            this._cameraInstance.parent = this.gameObject;
+        }
+    }
+    Hammurabi.Camera = Camera;
+})(Hammurabi || (Hammurabi = {}));
+var Hammurabi;
+(function (Hammurabi) {
+    let LightType;
+    (function (LightType) {
+        LightType[LightType["Spot"] = 0] = "Spot";
+        LightType[LightType["Directional"] = 1] = "Directional";
+        LightType[LightType["Point"] = 2] = "Point";
+        LightType[LightType["Area"] = 3] = "Area";
+        LightType[LightType["Undefined"] = 4] = "Undefined";
+    })(LightType = Hammurabi.LightType || (Hammurabi.LightType = {}));
+    class Light extends Hammurabi.Component {
+        constructor(gameObject) {
+            super(gameObject);
+            this._spotAngle = 90;
+            this._syncLightTransform = () => {
+                if (this._lightInstance instanceof BABYLON.DirectionalLight) {
+                    this.gameObject.getDirectionToRef(BABYLON.Axis.Z, this._lightInstance.direction);
+                }
+            };
+            this.name = "Light";
+            this._lightInstance = this._useDirectionalLight();
+            this._lightInstance.parent = gameObject;
+            this.scene.onBeforeRenderObservable.add(this._syncLightTransform);
+        }
+        get color() {
+            return Hammurabi.ColorUtils.Color3ToIColor(this._lightInstance.diffuse);
+        }
+        set color(c) {
+            this._lightInstance.diffuse = Hammurabi.ColorUtils.IColorToColor3(c);
+        }
+        get intensity() {
+            return this._lightInstance.intensity;
+        }
+        set intensity(v) {
+            this._lightInstance.intensity = v;
+        }
+        get range() {
+            return this._lightInstance.range;
+        }
+        set range(v) {
+            this._lightInstance.range = v;
+        }
+        get type() {
+            if (this._lightInstance instanceof BABYLON.SpotLight) {
+                return LightType.Spot;
+            }
+            if (this._lightInstance instanceof BABYLON.DirectionalLight) {
+                return LightType.Directional;
+            }
+            if (this._lightInstance instanceof BABYLON.PointLight) {
+                return LightType.Point;
+            }
+            return LightType.Undefined;
+        }
+        set type(t) {
+            if (t !== this.type) {
+                let newLight;
+                if (t === LightType.Spot) {
+                    newLight = this._useSpotLight();
+                }
+                else if (t === LightType.Directional || t === LightType.Area) {
+                    newLight = this._useDirectionalLight();
+                }
+                else if (t === LightType.Point) {
+                    newLight = this._usePointLight();
+                }
+                else {
+                    newLight = this._usePointLight();
+                }
+                newLight.parent = this.gameObject;
+                newLight.diffuse = Hammurabi.ColorUtils.IColorToColor3(this.color);
+                newLight.intensity = this.intensity;
+                newLight.range = this.range;
+                this._lightInstance.dispose();
+                this._lightInstance = newLight;
+            }
+        }
+        get spotAngle() {
+            return this._spotAngle;
+        }
+        set spotAngle(v) {
+            this._spotAngle = v;
+            if (this._lightInstance instanceof BABYLON.SpotLight) {
+                this._lightInstance.angle = v / 180 * Math.PI;
+            }
+        }
+        _useSpotLight() {
+            let spotLight = new BABYLON.SpotLight("light_instance", BABYLON.Vector3.Zero(), BABYLON.Vector3.Up(), this.spotAngle / 180 * Math.PI, 1, this.scene);
+            return spotLight;
+        }
+        _useDirectionalLight() {
+            let directionalLight = new BABYLON.DirectionalLight("light_instance", BABYLON.Vector3.Up(), this.scene);
+            return directionalLight;
+        }
+        _usePointLight() {
+            let pointLight = new BABYLON.PointLight("light_instance", BABYLON.Vector3.Zero(), this.scene);
+            return pointLight;
+        }
+    }
+    Hammurabi.Light = Light;
 })(Hammurabi || (Hammurabi = {}));
 var Hammurabi;
 (function (Hammurabi) {
@@ -671,12 +708,6 @@ var Hammurabi;
 })(Hammurabi || (Hammurabi = {}));
 var Hammurabi;
 (function (Hammurabi) {
-    class Quaternion extends BABYLON.Vector3 {
-    }
-    Hammurabi.Quaternion = Quaternion;
-})(Hammurabi || (Hammurabi = {}));
-var Hammurabi;
-(function (Hammurabi) {
     class RigidBody extends Hammurabi.Component {
         constructor(gameObject) {
             super(gameObject);
@@ -723,31 +754,6 @@ var Hammurabi;
 })(Hammurabi || (Hammurabi = {}));
 var Hammurabi;
 (function (Hammurabi) {
-    class Scene extends BABYLON.Scene {
-        constructor(engine) {
-            super(engine);
-            this.colliders = [];
-            Scene.Instance = this;
-            this.mouse = new Hammurabi.Mouse(this);
-            this.keyboard = new Hammurabi.KeyBoard(this);
-            this.physicWorld = new OIMO.World({
-                timestep: 1 / 60,
-                iterations: 8,
-                broadphase: 1,
-                worldscale: 1,
-                random: true,
-                info: false,
-                gravity: [0, -9.8, 0]
-            });
-            this.registerBeforeRender(() => {
-                this.physicWorld.step();
-            });
-        }
-    }
-    Hammurabi.Scene = Scene;
-})(Hammurabi || (Hammurabi = {}));
-var Hammurabi;
-(function (Hammurabi) {
     class Transform extends Hammurabi.Component {
         constructor(gameObject) {
             super(gameObject);
@@ -774,12 +780,6 @@ var Hammurabi;
         }
     }
     Hammurabi.Transform = Transform;
-})(Hammurabi || (Hammurabi = {}));
-var Hammurabi;
-(function (Hammurabi) {
-    class Vector3 extends BABYLON.Vector3 {
-    }
-    Hammurabi.Vector3 = Vector3;
 })(Hammurabi || (Hammurabi = {}));
 var Hammurabi;
 (function (Hammurabi) {

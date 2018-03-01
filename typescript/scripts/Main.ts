@@ -20,13 +20,13 @@ class Main {
         Main.ComponentConstructors.set("MeshRenderer", Hammurabi.MeshRenderer);
         Main.ComponentConstructors.set("Camera", Hammurabi.Camera);
         Main.ComponentConstructors.set("Light", Hammurabi.Light);
+        Main.ComponentConstructors.set("RigidBody", Hammurabi.RigidBody);
         Main.ComponentConstructors.set("BoxCollider", Hammurabi.BoxCollider);
+
         this.scene = new Hammurabi.Scene(this.engine);
         this.scene.clearColor.copyFromFloats(0.9, 0.9, 0.9, 1);
         Main.scene = this.scene;
         this.resize();
-
-        let mouse = new Hammurabi.Mouse(this.scene);
 
         await Hammurabi.Loader.LoadScene("test", this.scene);
         main.animate();

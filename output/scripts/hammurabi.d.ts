@@ -1,40 +1,4 @@
 declare module Hammurabi {
-    class Component {
-        name: string;
-        gameObject: GameObject;
-        readonly scene: Scene;
-        readonly transform: Transform;
-        constructor(gameObject: GameObject);
-        GetComponent<T extends Component>(TConstructor: new (gameObject: GameObject) => T): T;
-        GetComponents<T extends Component>(TConstructor: new (gameObject: GameObject) => T): T[];
-    }
-}
-declare module Hammurabi {
-    abstract class Collider extends Component {
-        constructor(gameObject: GameObject);
-        destroy(): void;
-        abstract intersectsRay(ray: BABYLON.Ray): number;
-        abstract triggerMouseDown(): void;
-        abstract triggerMouseUp(): void;
-    }
-}
-declare module Hammurabi {
-    class BoxCollider extends Collider {
-        center: Vector3;
-        size: Vector3;
-        constructor(gameObject: GameObject);
-        intersectsRay(ray: BABYLON.Ray): number;
-        triggerMouseDown(): void;
-        triggerMouseUp(): void;
-    }
-}
-declare module Hammurabi {
-    class Camera extends Component {
-        private _cameraInstance;
-        constructor(gameObject: GameObject);
-    }
-}
-declare module Hammurabi {
     class GameObject extends BABYLON.Mesh {
         scene: Scene;
         transform: Transform;
@@ -117,29 +81,6 @@ declare module Hammurabi {
     }
 }
 declare module Hammurabi {
-    enum LightType {
-        Spot = 0,
-        Directional = 1,
-        Point = 2,
-        Area = 3,
-        Undefined = 4,
-    }
-    class Light extends Component {
-        color: IColor;
-        intensity: number;
-        range: number;
-        type: LightType;
-        private _spotAngle;
-        spotAngle: number;
-        private _lightInstance;
-        constructor(gameObject: GameObject);
-        private _useSpotLight();
-        private _useDirectionalLight();
-        private _usePointLight();
-        private _syncLightTransform;
-    }
-}
-declare module Hammurabi {
     class Loader {
         static LoadScene(ref: string, scene: Scene): Promise<void>;
         private static _getScene(ref);
@@ -191,6 +132,83 @@ declare module Hammurabi {
     }
 }
 declare module Hammurabi {
+    class Quaternion extends BABYLON.Vector3 {
+    }
+}
+declare module Hammurabi {
+    class Scene extends BABYLON.Scene {
+        static Instance: Scene;
+        mouse: Mouse;
+        keyboard: KeyBoard;
+        colliders: Collider[];
+        physicWorld: OIMO.World;
+        constructor(engine: BABYLON.Engine);
+    }
+}
+declare module Hammurabi {
+    class Vector3 extends BABYLON.Vector3 {
+    }
+}
+declare module Hammurabi {
+    class Component {
+        name: string;
+        gameObject: GameObject;
+        readonly scene: Scene;
+        readonly transform: Transform;
+        constructor(gameObject: GameObject);
+        GetComponent<T extends Component>(TConstructor: new (gameObject: GameObject) => T): T;
+        GetComponents<T extends Component>(TConstructor: new (gameObject: GameObject) => T): T[];
+    }
+}
+declare module Hammurabi {
+    abstract class Collider extends Component {
+        constructor(gameObject: GameObject);
+        destroy(): void;
+        abstract intersectsRay(ray: BABYLON.Ray): number;
+        abstract triggerMouseDown(): void;
+        abstract triggerMouseUp(): void;
+    }
+}
+declare module Hammurabi {
+    class BoxCollider extends Collider {
+        center: Vector3;
+        size: Vector3;
+        constructor(gameObject: GameObject);
+        intersectsRay(ray: BABYLON.Ray): number;
+        triggerMouseDown(): void;
+        triggerMouseUp(): void;
+    }
+}
+declare module Hammurabi {
+    class Camera extends Component {
+        private _cameraInstance;
+        constructor(gameObject: GameObject);
+    }
+}
+declare module Hammurabi {
+    enum LightType {
+        Spot = 0,
+        Directional = 1,
+        Point = 2,
+        Area = 3,
+        Undefined = 4,
+    }
+    class Light extends Component {
+        color: IColor;
+        intensity: number;
+        range: number;
+        type: LightType;
+        private _spotAngle;
+        spotAngle: number;
+        private _lightInstance;
+        constructor(gameObject: GameObject);
+        private _useSpotLight();
+        private _useDirectionalLight();
+        private _usePointLight();
+        private _syncLightTransform;
+    }
+}
+declare module Hammurabi {
     class MeshFilter extends Component {
         private _mesh;
         mesh: Mesh;
@@ -219,10 +237,6 @@ declare module Hammurabi {
     }
 }
 declare module Hammurabi {
-    class Quaternion extends BABYLON.Vector3 {
-    }
-}
-declare module Hammurabi {
     class RigidBody extends Component {
         private _bodyInstance;
         weight: number;
@@ -232,25 +246,11 @@ declare module Hammurabi {
     }
 }
 declare module Hammurabi {
-    class Scene extends BABYLON.Scene {
-        static Instance: Scene;
-        mouse: Mouse;
-        keyboard: KeyBoard;
-        colliders: Collider[];
-        physicWorld: OIMO.World;
-        constructor(engine: BABYLON.Engine);
-    }
-}
-declare module Hammurabi {
     class Transform extends Component {
         constructor(gameObject: GameObject);
         localPosition: BABYLON.Vector3;
         localRotation: BABYLON.Quaternion;
         localScale: BABYLON.Vector3;
-    }
-}
-declare module Hammurabi {
-    class Vector3 extends BABYLON.Vector3 {
     }
 }
 declare module Hammurabi {
