@@ -21,6 +21,9 @@ namespace Hammurabi
 			if (target is MeshFilter) {
                 return MeshFilterData.MeshFilterDataFromSource(target as MeshFilter);
 			}
+			if (target is Rigidbody) {
+                return RigidbodyData.RigidbodyDataFromSource(target as Rigidbody);
+			}
 			if (target is MonoBehaviour) {
                 return MonoBehaviourData.MonoBehaviourDataFromSource(target as MonoBehaviour, serializer);
 			}

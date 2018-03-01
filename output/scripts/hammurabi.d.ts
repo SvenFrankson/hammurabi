@@ -1,3 +1,5 @@
+/// <reference path="../typescript/node_modules/@types/jquery/index.d.ts" />
+/// <reference types="babylonjs" />
 declare module Hammurabi {
     class GameObject extends BABYLON.Mesh {
         scene: Scene;
@@ -55,6 +57,7 @@ declare module Hammurabi {
         spotAngle?: number;
         center?: IVector3;
         size?: IVector3;
+        weight?: number;
         properties?: ISerializedProperty[];
     }
     interface IMesh {
@@ -95,6 +98,7 @@ declare module Hammurabi {
         private static _setCameraAt(data, target);
         private static _setLightAt(data, target);
         private static _setBoxColliderAt(data, target);
+        private static _setRigidbodyAt(data, target);
         private static _setMonoBehaviourAt(data, target);
         private static _loadMesh(ref);
         private static _setMeshAt(data, target);
@@ -237,9 +241,9 @@ declare module Hammurabi {
     }
 }
 declare module Hammurabi {
-    class RigidBody extends Component {
+    class Rigidbody extends Component {
         private _bodyInstance;
-        weight: number;
+        mass: number;
         constructor(gameObject: GameObject);
         private _registerStart();
         private _registerUpdate();

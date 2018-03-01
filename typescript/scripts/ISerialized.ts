@@ -48,6 +48,8 @@ module Hammurabi {
         // Colliders
         center?: IVector3;
         size?: IVector3;
+        // Rigidbody
+        weight?: number;
         // MonoBehaviour
         properties?: ISerializedProperty[];
     }

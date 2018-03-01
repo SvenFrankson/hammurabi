@@ -178,6 +178,9 @@ var Hammurabi;
             if (target instanceof Hammurabi.BoxCollider) {
                 Loader._setBoxColliderAt(data, target);
             }
+            if (target instanceof Hammurabi.Rigidbody) {
+                Loader._setRigidbodyAt(data, target);
+            }
             if (target instanceof Hammurabi.MonoBehaviour) {
                 Loader._setMonoBehaviourAt(data, target);
             }
@@ -207,6 +210,9 @@ var Hammurabi;
         static _setBoxColliderAt(data, target) {
             target.center = Hammurabi.Sanitizer.Position(data.center);
             target.size = Hammurabi.Sanitizer.Size(data.size);
+        }
+        static _setRigidbodyAt(data, target) {
+            target.mass = Hammurabi.Sanitizer.Number(data.weight);
         }
         static _setMonoBehaviourAt(data, target) {
             if (data.properties) {
@@ -324,7 +330,7 @@ class Main {
             Main.ComponentConstructors.set("MeshRenderer", Hammurabi.MeshRenderer);
             Main.ComponentConstructors.set("Camera", Hammurabi.Camera);
             Main.ComponentConstructors.set("Light", Hammurabi.Light);
-            Main.ComponentConstructors.set("RigidBody", Hammurabi.RigidBody);
+            Main.ComponentConstructors.set("Rigidbody", Hammurabi.Rigidbody);
             Main.ComponentConstructors.set("BoxCollider", Hammurabi.BoxCollider);
             this.scene = new Hammurabi.Scene(this.engine);
             this.scene.clearColor.copyFromFloats(0.9, 0.9, 0.9, 1);
@@ -708,10 +714,10 @@ var Hammurabi;
 })(Hammurabi || (Hammurabi = {}));
 var Hammurabi;
 (function (Hammurabi) {
-    class RigidBody extends Hammurabi.Component {
+    class Rigidbody extends Hammurabi.Component {
         constructor(gameObject) {
             super(gameObject);
-            this.weight = 1;
+            this.mass = 1;
             this.name = "RigidBody";
             this._registerStart();
         }
@@ -725,7 +731,7 @@ var Hammurabi;
                         pos: this.gameObject.transform.localPosition.asArray(),
                         rot: this.gameObject.transform.localRotation.toEulerAngles().asArray(),
                         move: true,
-                        density: this.weight / (collider.size.x * collider.size.y * collider.size.z),
+                        density: this.mass / (collider.size.x * collider.size.y * collider.size.z),
                         friction: 0.2,
                         restitution: 0.2,
                         belongsTo: 1,
@@ -750,7 +756,7 @@ var Hammurabi;
             });
         }
     }
-    Hammurabi.RigidBody = RigidBody;
+    Hammurabi.Rigidbody = Rigidbody;
 })(Hammurabi || (Hammurabi = {}));
 var Hammurabi;
 (function (Hammurabi) {

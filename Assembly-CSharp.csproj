@@ -52,17 +52,18 @@
   </ItemGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\Data.cs" />
-     <Compile Include="Assets\Scripts\Data\CameraData.cs" />
      <Compile Include="Assets\Scripts\Data\ColorData.cs" />
-     <Compile Include="Assets\Scripts\Data\ComponentData.cs" />
+     <Compile Include="Assets\Scripts\Data\Components\CameraData.cs" />
+     <Compile Include="Assets\Scripts\Data\Components\ComponentData.cs" />
+     <Compile Include="Assets\Scripts\Data\Components\LightData.cs" />
+     <Compile Include="Assets\Scripts\Data\Components\MeshFilterData.cs" />
+     <Compile Include="Assets\Scripts\Data\Components\MonoBehaviourData.cs" />
+     <Compile Include="Assets\Scripts\Data\Components\RigidbodyData.cs" />
+     <Compile Include="Assets\Scripts\Data\Components\TransformData.cs" />
      <Compile Include="Assets\Scripts\Data\GameObjectData.cs" />
-     <Compile Include="Assets\Scripts\Data\LightData.cs" />
      <Compile Include="Assets\Scripts\Data\MeshData.cs" />
-     <Compile Include="Assets\Scripts\Data\MeshFilterData.cs" />
-     <Compile Include="Assets\Scripts\Data\MonoBehaviourData.cs" />
      <Compile Include="Assets\Scripts\Data\QuaternionData.cs" />
      <Compile Include="Assets\Scripts\Data\SceneData.cs" />
-     <Compile Include="Assets\Scripts\Data\TransformData.cs" />
      <Compile Include="Assets\Scripts\Data\Vector3Data.cs" />
      <Compile Include="Assets\Scripts\Hammurabi.cs" />
      <Compile Include="Assets\Tests\TestMBH.cs" />

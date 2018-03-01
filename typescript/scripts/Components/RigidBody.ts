@@ -1,9 +1,9 @@
 module Hammurabi {
 
-    export class RigidBody extends Component {
+    export class Rigidbody extends Component {
 
         private _bodyInstance: OIMO.Body;
-        public weight: number = 1;
+        public mass: number = 1;
     
         constructor(gameObject: GameObject) {
             super(gameObject);
@@ -22,7 +22,7 @@ module Hammurabi {
                             pos: this.gameObject.transform.localPosition.asArray(),
                             rot: this.gameObject.transform.localRotation.toEulerAngles().asArray(),
                             move: true,
-                            density: this.weight / (collider.size.x * collider.size.y * collider.size.z),
+                            density: this.mass / (collider.size.x * collider.size.y * collider.size.z),
                             friction: 0.2,
                             restitution: 0.2,
                             belongsTo: 1,

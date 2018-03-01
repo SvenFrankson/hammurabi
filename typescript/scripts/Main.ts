@@ -20,7 +20,7 @@ class Main {
         Main.ComponentConstructors.set("MeshRenderer", Hammurabi.MeshRenderer);
         Main.ComponentConstructors.set("Camera", Hammurabi.Camera);
         Main.ComponentConstructors.set("Light", Hammurabi.Light);
-        Main.ComponentConstructors.set("RigidBody", Hammurabi.RigidBody);
+        Main.ComponentConstructors.set("Rigidbody", Hammurabi.Rigidbody);
         Main.ComponentConstructors.set("BoxCollider", Hammurabi.BoxCollider);
 
         this.scene = new Hammurabi.Scene(this.engine);

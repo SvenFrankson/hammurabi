@@ -112,6 +112,9 @@ module Hammurabi {
             if (target instanceof BoxCollider) {
                 Loader._setBoxColliderAt(data, target);
             }
+            if (target instanceof Rigidbody) {
+                Loader._setRigidbodyAt(data, target);
+            }
             if (target instanceof MonoBehaviour) {
                 Loader._setMonoBehaviourAt(data, target);
             }
@@ -161,6 +164,10 @@ module Hammurabi {
         private static _setBoxColliderAt(data: IComponent, target: BoxCollider): void {
             target.center = Sanitizer.Position(data.center);
             target.size = Sanitizer.Size(data.size);
+        }
+
+        private static _setRigidbodyAt(data: IComponent, target: Rigidbody): void {
+            target.mass = Sanitizer.Number(data.weight);
         }
     
         private static _setMonoBehaviourAt(data: IComponent, target: MonoBehaviour): void {
