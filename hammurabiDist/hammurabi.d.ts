@@ -177,7 +177,11 @@ declare module Hammurabi {
     class BoxCollider extends Collider {
         center: Vector3;
         size: Vector3;
+        private _localSize;
+        readonly localSize: Vector3;
+        private _staticBodyInstance;
         constructor(gameObject: GameObject);
+        private _registerStart();
         intersectsRay(ray: BABYLON.Ray): number;
         triggerMouseDown(): void;
         triggerMouseUp(): void;

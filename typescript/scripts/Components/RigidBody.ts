@@ -21,11 +21,11 @@ module Hammurabi {
                         console.log(this.mass / (collider.size.x * collider.size.y * collider.size.z));
                         let bodyInstanceProperties: OIMO.IBodyProperties = {
                             type: "box",
-                            size: collider.size.asArray(),
+                            size: collider.localSize.asArray(),
                             pos: this.gameObject.transform.localPosition.asArray(),
                             rot: this.gameObject.transform.localRotation.toEulerAngles().asArray(),
                             move: true,
-                            density: this.mass / (collider.size.x * collider.size.y * collider.size.z),
+                            density: this.mass / (collider.localSize.x * collider.localSize.y * collider.localSize.z),
                             friction: 0.2,
                             restitution: 0.2,
                             belongsTo: 1,
