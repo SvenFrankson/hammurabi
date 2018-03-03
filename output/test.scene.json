@@ -91,6 +91,19 @@
                     "mesh": "Cube Instance"
                 },
                 {
+                    "n": "BoxCollider",
+                    "center": {
+                        "x": 0.000,
+                        "y": 0.000,
+                        "z": 0.000
+                    },
+                    "size": {
+                        "x": 1.000,
+                        "y": 1.000,
+                        "z": 1.000
+                    }
+                },
+                {
                     "n": "Rigidbody",
                     "mass": 1.000
                 }
@@ -121,6 +134,19 @@
                 {
                     "n": "MeshFilter",
                     "mesh": "Cube Instance"
+                },
+                {
+                    "n": "BoxCollider",
+                    "center": {
+                        "x": 0.000,
+                        "y": 0.000,
+                        "z": 0.000
+                    },
+                    "size": {
+                        "x": 1.000,
+                        "y": 1.000,
+                        "z": 1.000
+                    }
                 }
             ]
         },
@@ -149,6 +175,19 @@
                 {
                     "n": "MeshFilter",
                     "mesh": "Cube Instance"
+                },
+                {
+                    "n": "BoxCollider",
+                    "center": {
+                        "x": 0.000,
+                        "y": 0.000,
+                        "z": 0.000
+                    },
+                    "size": {
+                        "x": 1.000,
+                        "y": 1.000,
+                        "z": 1.000
+                    }
                 }
             ]
         },
@@ -177,6 +216,19 @@
                 {
                     "n": "MeshFilter",
                     "mesh": "Cube Instance"
+                },
+                {
+                    "n": "BoxCollider",
+                    "center": {
+                        "x": 0.000,
+                        "y": 0.000,
+                        "z": 0.000
+                    },
+                    "size": {
+                        "x": 1.000,
+                        "y": 1.000,
+                        "z": 1.000
+                    }
                 }
             ]
         }

@@ -164,10 +164,11 @@ module Hammurabi {
         private static _setBoxColliderAt(data: IComponent, target: BoxCollider): void {
             target.center = Sanitizer.Position(data.center);
             target.size = Sanitizer.Size(data.size);
+            console.log(target);
         }
 
         private static _setRigidbodyAt(data: IComponent, target: Rigidbody): void {
-            target.mass = Sanitizer.Number(data.weight);
+            target.mass = Sanitizer.Number(data.mass);
         }
     
         private static _setMonoBehaviourAt(data: IComponent, target: MonoBehaviour): void {

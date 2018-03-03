@@ -24,6 +24,9 @@ namespace Hammurabi
 			if (target is Rigidbody) {
                 return RigidbodyData.RigidbodyDataFromSource(target as Rigidbody);
 			}
+			if (target is BoxCollider) {
+                return BoxColliderData.BoxColliderDataFromSource(target as BoxCollider);
+			}
 			if (target is MonoBehaviour) {
                 return MonoBehaviourData.MonoBehaviourDataFromSource(target as MonoBehaviour, serializer);
 			}

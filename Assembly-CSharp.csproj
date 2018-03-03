@@ -53,6 +53,7 @@
   <ItemGroup>
      <Compile Include="Assets\Scripts\Data.cs" />
      <Compile Include="Assets\Scripts\Data\ColorData.cs" />
+     <Compile Include="Assets\Scripts\Data\Components\BoxColliderData.cs" />
      <Compile Include="Assets\Scripts\Data\Components\CameraData.cs" />
      <Compile Include="Assets\Scripts\Data\Components\ComponentData.cs" />
      <Compile Include="Assets\Scripts\Data\Components\LightData.cs" />

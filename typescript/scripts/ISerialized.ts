@@ -49,7 +49,7 @@ module Hammurabi {
         center?: IVector3;
         size?: IVector3;
         // Rigidbody
-        weight?: number;
+        mass?: number;
         // MonoBehaviour
         properties?: ISerializedProperty[];
     }

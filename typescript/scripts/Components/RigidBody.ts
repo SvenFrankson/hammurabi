@@ -16,6 +16,9 @@ module Hammurabi {
                 () => {
                     let collider = this.GetComponent(BoxCollider);
                     if (collider) {
+                        console.log(this.gameObject.transform.localPosition.toString());
+                        console.log(this.gameObject.transform.localRotation.toString());
+                        console.log(this.mass / (collider.size.x * collider.size.y * collider.size.z));
                         let bodyInstanceProperties: OIMO.IBodyProperties = {
                             type: "box",
                             size: collider.size.asArray(),
@@ -42,6 +45,7 @@ module Hammurabi {
                     if (this._bodyInstance) {
                         let bodyInstancePosition = this._bodyInstance.getPosition();
                         let bodyInstanceRotation = this._bodyInstance.getQuaternion();
+                        console.log(this._bodyInstance);
                         if (bodyInstancePosition && bodyInstanceRotation) {
                             this.gameObject.transform.localPosition.copyFromFloats(
                                 bodyInstancePosition.x,

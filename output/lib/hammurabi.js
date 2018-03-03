@@ -210,9 +210,10 @@ var Hammurabi;
         static _setBoxColliderAt(data, target) {
             target.center = Hammurabi.Sanitizer.Position(data.center);
             target.size = Hammurabi.Sanitizer.Size(data.size);
+            console.log(target);
         }
         static _setRigidbodyAt(data, target) {
-            target.mass = Hammurabi.Sanitizer.Number(data.weight);
+            target.mass = Hammurabi.Sanitizer.Number(data.mass);
         }
         static _setMonoBehaviourAt(data, target) {
             if (data.properties) {
@@ -725,6 +726,9 @@ var Hammurabi;
             let observer = this.scene.onBeforeRenderObservable.add(() => {
                 let collider = this.GetComponent(Hammurabi.BoxCollider);
                 if (collider) {
+                    console.log(this.gameObject.transform.localPosition.toString());
+                    console.log(this.gameObject.transform.localRotation.toString());
+                    console.log(this.mass / (collider.size.x * collider.size.y * collider.size.z));
                     let bodyInstanceProperties = {
                         type: "box",
                         size: collider.size.asArray(),
@@ -748,6 +752,7 @@ var Hammurabi;
                 if (this._bodyInstance) {
                     let bodyInstancePosition = this._bodyInstance.getPosition();
                     let bodyInstanceRotation = this._bodyInstance.getQuaternion();
+                    console.log(this._bodyInstance);
                     if (bodyInstancePosition && bodyInstanceRotation) {
                         this.gameObject.transform.localPosition.copyFromFloats(bodyInstancePosition.x, bodyInstancePosition.y, bodyInstancePosition.z);
                         this.gameObject.transform.localRotation.copyFromFloats(bodyInstanceRotation.x, bodyInstanceRotation.y, bodyInstanceRotation.z, bodyInstanceRotation.w);
