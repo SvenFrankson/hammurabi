@@ -18,6 +18,7 @@ namespace Hammurabi {
                 Hammurabi serializer = new Hammurabi();
                 serializer.SaveCurrentScene();
                 serializer.SaveLinkedMeshes();
+                serializer.SaveLinkedMaterials();
                 serializer.SaveLinkedScripts();
             }
         }

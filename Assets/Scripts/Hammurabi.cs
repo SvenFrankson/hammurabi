@@ -58,6 +58,36 @@ namespace Hammurabi {
             }
         }
 
+        public void SaveLinkedMaterials() {
+			Renderer[] renderers = Renderer.FindObjectsOfType<Renderer>();
+            List<Material> materials = new List<Material>();
+            for (int i = 0; i < renderers.Length; i++) {
+                for (int j = 0; j < renderers[i].sharedMaterials.Length; j++) {
+                Material material = renderers[i].sharedMaterials[j];
+                if (material != null) {
+                    if (!materials.Contains(material)) {
+                        materials.Add(material);
+                    }
+                }
+            }
+            }
+            for (int i = 0; i < materials.Count; i++) {
+                Material material = materials[i];
+                MaterialData data = MaterialData.MaterialDataFromSource(material);
+                string jsonData = data.ToJson();
+                string path = Application.dataPath;
+                path += "/../output/assets/linked/";
+                Directory.CreateDirectory(path);
+                path += material.name + ".material.json";
+                if (File.Exists(path)) {
+                    File.Delete(path);
+                }
+                StreamWriter writer = new StreamWriter(path);
+                writer.Write(jsonData);
+                writer.Close();
+            }
+        }
+
         public void LinkScript(MonoScript script) {
             if (!this._linkedScripts.Contains(script)) {
                 this._linkedScripts.Add(script);

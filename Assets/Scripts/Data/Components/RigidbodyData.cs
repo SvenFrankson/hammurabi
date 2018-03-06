@@ -10,7 +10,6 @@ namespace Hammurabi
 		public float mass;
 
 		public static RigidbodyData RigidbodyDataFromSource(Rigidbody target) {
-			Debug.Log("Serialize Rigidbody");
 			RigidbodyData data = new RigidbodyData();
             data.n = "Rigidbody";
 			data.mass = target.mass;

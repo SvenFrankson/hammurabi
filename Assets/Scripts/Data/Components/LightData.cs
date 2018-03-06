@@ -14,7 +14,6 @@ namespace Hammurabi
         public float spotAngle;
 
 		public static LightData LightDataFromSource(Light target) {
-			Debug.Log("Serialize Light");
 			LightData data = new LightData();
             data.n = "Light";
 			data.color = ColorData.ColorDataFromSource(target.color);

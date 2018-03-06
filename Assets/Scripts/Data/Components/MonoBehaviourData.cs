@@ -33,7 +33,6 @@ namespace Hammurabi
         public SerializedProperty[] properties;
 
 		public static MonoBehaviourData MonoBehaviourDataFromSource(MonoBehaviour target, Hammurabi serializer) {
-			Debug.Log("Serialize MonoBehaviour");
 			MonoBehaviourData data = new MonoBehaviourData();
             data.n = "MonoBehaviour";
             SerializedObject serializableTarget = new SerializedObject(target);

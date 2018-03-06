@@ -10,7 +10,6 @@ namespace Hammurabi
         public string mesh;
 
 		public static MeshFilterData MeshFilterDataFromSource(MeshFilter target) {
-			Debug.Log("Serialize MeshFilter");
 			MeshFilterData data = new MeshFilterData();
             data.n = "MeshFilter";
 			data.mesh = target.sharedMesh.name;

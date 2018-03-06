@@ -12,7 +12,6 @@ namespace Hammurabi
 		public Vector3Data s;
 
 		public static TransformData TransformDataFromSource(Transform target) {
-			Debug.Log("Serialize Transform");
 			TransformData data = new TransformData();
             data.n = "Transform";
 			data.p = Vector3Data.Vector3DataFromSource(target.localPosition);

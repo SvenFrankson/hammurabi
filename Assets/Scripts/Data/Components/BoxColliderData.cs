@@ -11,7 +11,6 @@ namespace Hammurabi
         public Vector3Data size;
 
 		public static BoxColliderData BoxColliderDataFromSource(BoxCollider target) {
-			Debug.Log("Serialize BoxCollider");
 			BoxColliderData data = new BoxColliderData();
             data.n = "BoxCollider";
 			data.center = Vector3Data.Vector3DataFromSource(target.center);

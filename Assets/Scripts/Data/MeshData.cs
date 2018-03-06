@@ -14,7 +14,6 @@ namespace Hammurabi
         public float[] u;
 
 		public static MeshData MeshDataFromSource(Mesh target) {
-			Debug.Log("Serialize Transform");
 			MeshData data = new MeshData();
             data.name = target.name;
 			data.v = new float[target.vertices.Length * 3];

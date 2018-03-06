@@ -8,7 +8,6 @@ namespace Hammurabi
 	public class CameraData: ComponentData {
 
 		public static CameraData CameraDataFromSource(Camera target) {
-			Debug.Log("Serialize Camera");
 			CameraData data = new CameraData();
             data.n = "Camera";
 			return data;

@@ -51,17 +51,18 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\Scripts\Data.cs" />
      <Compile Include="Assets\Scripts\Data\ColorData.cs" />
      <Compile Include="Assets\Scripts\Data\Components\BoxColliderData.cs" />
      <Compile Include="Assets\Scripts\Data\Components\CameraData.cs" />
      <Compile Include="Assets\Scripts\Data\Components\ComponentData.cs" />
      <Compile Include="Assets\Scripts\Data\Components\LightData.cs" />
      <Compile Include="Assets\Scripts\Data\Components\MeshFilterData.cs" />
+     <Compile Include="Assets\Scripts\Data\Components\MeshRendererData.cs" />
      <Compile Include="Assets\Scripts\Data\Components\MonoBehaviourData.cs" />
      <Compile Include="Assets\Scripts\Data\Components\RigidbodyData.cs" />
      <Compile Include="Assets\Scripts\Data\Components\TransformData.cs" />
      <Compile Include="Assets\Scripts\Data\GameObjectData.cs" />
+     <Compile Include="Assets\Scripts\Data\MaterialData.cs" />
      <Compile Include="Assets\Scripts\Data\MeshData.cs" />
      <Compile Include="Assets\Scripts\Data\QuaternionData.cs" />
      <Compile Include="Assets\Scripts\Data\SceneData.cs" />
