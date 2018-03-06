@@ -17,7 +17,7 @@ module Hammurabi {
             this.physicWorld = new OIMO.World({
                 timestep: 1 / 60,
                 iterations: 8,
-                broadphase: 1,
+                broadphase: 10,
                 worldscale: 1,
                 random: true,
                 info: false,

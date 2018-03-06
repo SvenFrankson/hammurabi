@@ -31,9 +31,8 @@ module Hammurabi {
                             belongsTo: 1,
                             collidesWith: 0xffffffff
                         }
+                        console.log("RigidBody (moving object)");
                         this._bodyInstance = this.scene.physicWorld.add(bodyInstanceProperties);
-                        console.log(this._bodyInstance.getPosition().toString());
-                        console.log(this._bodyInstance.getQuaternion().toString());
                         this._registerUpdate();
                     }
                     this.scene.onBeforeRenderObservable.remove(observer);

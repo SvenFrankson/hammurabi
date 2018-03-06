@@ -40,6 +40,7 @@ module Hammurabi {
                             belongsTo: 1,
                             collidesWith: 0xffffffff
                         }
+                        console.log("BoxCollider (static object)");
                         this._staticBodyInstance = this.scene.physicWorld.add(bodyInstanceProperties);
                     }
                     this.scene.onBeforeRenderObservable.remove(observer);

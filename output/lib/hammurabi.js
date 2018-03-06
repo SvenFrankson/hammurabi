@@ -404,7 +404,7 @@ var Hammurabi;
             this.physicWorld = new OIMO.World({
                 timestep: 1 / 60,
                 iterations: 8,
-                broadphase: 1,
+                broadphase: 10,
                 worldscale: 1,
                 random: true,
                 info: false,
@@ -494,6 +494,7 @@ var Hammurabi;
                         belongsTo: 1,
                         collidesWith: 0xffffffff
                     };
+                    console.log("BoxCollider (static object)");
                     this._staticBodyInstance = this.scene.physicWorld.add(bodyInstanceProperties);
                 }
                 this.scene.onBeforeRenderObservable.remove(observer);
@@ -768,9 +769,8 @@ var Hammurabi;
                         belongsTo: 1,
                         collidesWith: 0xffffffff
                     };
+                    console.log("RigidBody (moving object)");
                     this._bodyInstance = this.scene.physicWorld.add(bodyInstanceProperties);
-                    console.log(this._bodyInstance.getPosition().toString());
-                    console.log(this._bodyInstance.getQuaternion().toString());
                     this._registerUpdate();
                 }
                 this.scene.onBeforeRenderObservable.remove(observer);
