@@ -1,4 +1,4 @@
-/// <reference path="../typescript/node_modules/@types/jquery/index.d.ts" />
+/// <reference path="../../typescript/node_modules/@types/jquery/index.d.ts" />
 /// <reference types="babylonjs" />
 declare module Hammurabi {
     class GameObject extends BABYLON.Mesh {

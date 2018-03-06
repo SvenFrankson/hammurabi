@@ -23,7 +23,7 @@ module Hammurabi {
                             type: "box",
                             size: collider.localSize.asArray(),
                             pos: this.gameObject.transform.localPosition.asArray(),
-                            rot: this.gameObject.transform.localRotation.toEulerAngles().asArray(),
+                            rot: this.gameObject.transform.localRotation.toEulerAngles().scaleInPlace(180 / Math.PI).asArray(),
                             move: true,
                             density: this.mass / (collider.localSize.x * collider.localSize.y * collider.localSize.z),
                             friction: 0.2,
@@ -32,6 +32,8 @@ module Hammurabi {
                             collidesWith: 0xffffffff
                         }
                         this._bodyInstance = this.scene.physicWorld.add(bodyInstanceProperties);
+                        console.log(this._bodyInstance.getPosition().toString());
+                        console.log(this._bodyInstance.getQuaternion().toString());
                         this._registerUpdate();
                     }
                     this.scene.onBeforeRenderObservable.remove(observer);
@@ -45,14 +47,13 @@ module Hammurabi {
                     if (this._bodyInstance) {
                         let bodyInstancePosition = this._bodyInstance.getPosition();
                         let bodyInstanceRotation = this._bodyInstance.getQuaternion();
-                        console.log(this._bodyInstance);
                         if (bodyInstancePosition && bodyInstanceRotation) {
                             this.gameObject.transform.localPosition.copyFromFloats(
                                 bodyInstancePosition.x,
                                 bodyInstancePosition.y,
                                 bodyInstancePosition.z
                             );
-                            this.gameObject.transform.localRotation.copyFromFloats(
+                            this.gameObject.transform.localRotation = new BABYLON.Quaternion(
                                 bodyInstanceRotation.x,
                                 bodyInstanceRotation.y,
                                 bodyInstanceRotation.z,
