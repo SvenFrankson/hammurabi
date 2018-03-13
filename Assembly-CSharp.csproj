@@ -51,6 +51,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\CSharpParser\CSEntity.cs" />
+     <Compile Include="Assets\Scripts\CSharpParser\CSParser.cs" />
      <Compile Include="Assets\Scripts\Data\ColorData.cs" />
      <Compile Include="Assets\Scripts\Data\Components\BoxColliderData.cs" />
      <Compile Include="Assets\Scripts\Data\Components\CameraData.cs" />

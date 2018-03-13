@@ -106,6 +106,9 @@ namespace Hammurabi {
                 StreamWriter writer = new StreamWriter(path);
                 writer.Write(this._linkedScripts[i].text);
                 writer.Close();
+
+                CSParser parser = new CSParser();
+                CSEntity entity = parser.Parse(this._linkedScripts[i].text);
             }
         }
     }
