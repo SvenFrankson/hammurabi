@@ -1,9 +1,8 @@
- #
---- using System.Collections #
---- using System.Collections.Generic #
---- using UnityEngine #
---- public class TestMBH : MonoBehaviour  #
---- --- public int speed #
---- --- void Start ()  #
---- --- void Update ()  #
---- --- --- this.transform.localRotation *= Quaternion.AngleAxis(speed, Vector3.up) #
+[Using ] using System.Collections #
+[Using ] using System.Collections.Generic #
+[Using ] using UnityEngine #
+[Class ] public class TestMBH : MonoBehaviour  #
+[Prop  ] --- public int speed #
+[Method] --- void Start ()  #
+[Method] --- void Update ()  #
+[Entity] --- --- this.transform.localRotation *= Quaternion.AngleAxis(speed, Vector3.up) #

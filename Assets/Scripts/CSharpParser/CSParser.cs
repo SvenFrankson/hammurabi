@@ -7,7 +7,7 @@ class CSParser {
     private CSEntity current;
 
     public CSEntity Parse(string script) {
-        CSEntity output = new CSEntity();
+        CSEntity output = new CSRoot();
         this.current = output;
         this.Read(script);
         return output;
@@ -43,17 +43,13 @@ class CSParser {
         }
         if (c == ';') {
             Debug.Log(";");
-            CSEntity entity = new CSEntity();
-            entity.rawContent = this.buffer;
-            this.current.AppendChild(entity);
+            CSEntity entity = CSEntityFactory.CreateEntity(this.buffer, this.current);
             this.buffer = "";
             this.Read(script);
             return;
         } else if (c == '{') {
             Debug.Log("{");
-            CSEntity entity = new CSEntity();
-            entity.rawContent = this.buffer;
-            this.current.AppendChild(entity);
+            CSEntity entity = CSEntityFactory.CreateEntity(this.buffer, this.current);
             this.current = entity;
             this.buffer = "";
             this.Read(script);

@@ -1,14 +1,18 @@
 using UnityEngine;
 using System.Collections.Generic;
 
-class CSEntity {
+public class CSEntity {
 
     public string rawContent;
     public CSEntity parent;
     public List<CSEntity> children = new List<CSEntity>();
 
-    public CSEntity() {
+    public CSEntity(string rawContent, CSEntity parent) {
         Debug.Log("Create new CSEntity");
+        this.rawContent = rawContent;
+        if (parent != null) {
+            parent.AppendChild(this);
+        }
     }
 
     public void AppendChild(CSEntity entity) {
@@ -16,11 +20,15 @@ class CSEntity {
         entity.parent = this;
     }
 
-    public string writeAsDebug() {
+    virtual public string getPrefix() {
+        return "[Entity]";
+    }
+
+    virtual public string writeAsDebug() {
         Debug.Log("...");
         CSEntity parent = this.parent;
-        string output = "";
-        while (parent != null) {
+        string output = this.getPrefix() + " ";
+        while (parent != null && !(parent is CSRoot)) {
             output += "--- ";
             parent = parent.parent;
         }
@@ -28,7 +36,7 @@ class CSEntity {
         return output;
     }
 
-    public string recursivelyWriteAsDebug() {
+    virtual public string recursivelyWriteAsDebug() {
         string output = this.writeAsDebug();
         this.children.ForEach(
             (child) => {
