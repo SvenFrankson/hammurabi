@@ -103,12 +103,13 @@ namespace Hammurabi {
                 if (File.Exists(path)) {
                     File.Delete(path);
                 }
-                StreamWriter writer = new StreamWriter(path);
-                writer.Write(this._linkedScripts[i].text);
-                writer.Close();
 
                 CSParser parser = new CSParser();
                 CSEntity entity = parser.Parse(this._linkedScripts[i].text);
+                
+                StreamWriter writer = new StreamWriter(path);
+                writer.Write(entity.recursivelyWriteAsDebug());
+                writer.Close();
             }
         }
     }
