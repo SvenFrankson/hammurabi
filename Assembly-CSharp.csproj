@@ -56,6 +56,7 @@
      <Compile Include="Assets\Scripts\CSharpParser\CSEntityFactory.cs" />
      <Compile Include="Assets\Scripts\CSharpParser\CSMethod.cs" />
      <Compile Include="Assets\Scripts\CSharpParser\CSParser.cs" />
+     <Compile Include="Assets\Scripts\CSharpParser\CSParsingTool.cs" />
      <Compile Include="Assets\Scripts\CSharpParser\CSProperty.cs" />
      <Compile Include="Assets\Scripts\CSharpParser\CSRoot.cs" />
      <Compile Include="Assets\Scripts\CSharpParser\CSUsing.cs" />

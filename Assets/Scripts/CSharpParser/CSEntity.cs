@@ -25,14 +25,13 @@ public class CSEntity {
     }
 
     virtual public string writeAsDebug() {
-        Debug.Log("...");
         CSEntity parent = this.parent;
         string output = this.getPrefix() + " ";
         while (parent != null && !(parent is CSRoot)) {
             output += "--- ";
             parent = parent.parent;
         }
-        output += this.rawContent + " #\n";
+        output += this.rawContent + "\n";
         return output;
     }
 
