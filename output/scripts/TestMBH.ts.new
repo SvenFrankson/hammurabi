@@ -4,6 +4,12 @@
 # [Class TestMBH] [Visibility public] [Base MonoBehaviour] #
 [Class ] public class TestMBH : MonoBehaviour 
 [Prop  ] --- public int speed
+# [Method Start] [Visibility public] [Return void] [Params:] #
 [Method] --- void Start () 
+# [Method Update] [Visibility public] [Return void] [Params:] #
 [Method] --- void Update () 
 [Entity] --- --- this.transform.localRotation *= Quaternion.AngleAxis(speed, Vector3.up)
+# [Method TestMethod] [Visibility public] [Return void] [Params:] [Type int Name a] #
+[Method] --- public void TestMethod( int   a) 
+# [Method TestMethod2] [Visibility public] [Return void] [Params:] [Type int Name a] [Type int Name foo] [Type float Name bar] #
+[Method] --- public void TestMethod2( int   a , int  foo ,     float  bar   ) 
