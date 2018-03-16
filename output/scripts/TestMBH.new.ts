@@ -1,6 +1,6 @@
-  class TestMBH extends MonoBehaviour {
-    public int speed;
-    private float test = 0.1f;
+  class TestMBH extends Hammurabi.MonoBehaviour {
+    public speed : number;
+    private test : number = 0.1f;
     public Start() : void {
     }
     public Update() : void {

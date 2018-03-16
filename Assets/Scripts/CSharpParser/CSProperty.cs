@@ -42,4 +42,14 @@ public class CSProperty: CSEntity {
         output += this.rawContent + "\n";
         return output;
     }
+
+    override public string writeAsTypescript() {
+        string output = this.Indent();
+        output += this.visibility + " " + this.name + " : " + CSParsingTool.TypescriptTypeFromCSharpType(this.type);
+        if (this.initializer != null) {
+            output += " = " + this.initializer;
+        }
+        output += ";\n";
+        return output;
+    }
 }

@@ -43,7 +43,7 @@ public class CSClass: CSEntity {
         string output = this.Indent();
         output += "class " + this.name;
         if (this.baseName != null) {
-            output += " extends " + this.baseName;
+            output += " extends " + CSParsingTool.TypescriptTypeFromCSharpType(this.baseName);
         }
         output += " {\n";
         this.children.ForEach(

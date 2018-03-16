@@ -20,6 +20,11 @@ class CSParsingTool {
         ) {
             return "number";
         }
+        if (
+            csharpType == "MonoBehaviour"
+        ) {
+            return "Hammurabi." + csharpType;
+        }
         return csharpType;
     }
 }
