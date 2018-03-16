@@ -38,4 +38,20 @@ public class CSClass: CSEntity {
         output += this.rawContent + "\n";
         return output;
     }
+
+    override public string writeAsTypescript() {
+        string output = this.Indent();
+        output += "class " + this.name;
+        if (this.baseName != null) {
+            output += " extends " + this.baseName;
+        }
+        output += " {\n";
+        this.children.ForEach(
+            (c) => {
+                output += c.writeAsTypescript();
+            }
+        );
+        output += this.Indent() + "}\n";
+        return output;
+    }
 }

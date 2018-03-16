@@ -99,7 +99,7 @@ namespace Hammurabi {
                 string path = Application.dataPath;
                 path += "/../output/scripts/";
                 Directory.CreateDirectory(path);
-                path += this._linkedScripts[i].name + ".ts.new";
+                path += this._linkedScripts[i].name + ".new.ts";
                 if (File.Exists(path)) {
                     File.Delete(path);
                 }
@@ -108,7 +108,8 @@ namespace Hammurabi {
                 CSEntity entity = parser.Parse(this._linkedScripts[i].text);
                 
                 StreamWriter writer = new StreamWriter(path);
-                writer.Write(entity.recursivelyWriteAsDebug());
+                // writer.Write(entity.recursivelyWriteAsDebug());
+                writer.Write(entity.writeAsTypescript());
                 writer.Close();
             }
         }

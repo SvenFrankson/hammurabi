@@ -65,4 +65,24 @@ public class CSMethod: CSEntity {
         output += this.rawContent + "\n";
         return output;
     }
+
+    override public string writeAsTypescript() {
+        string output = this.Indent();
+        output += this.visibility + " " + this.name + "(";
+        for (int i = 0; i < this.parameters.Count; i++) {
+            output += this.parameters[i].name + " : " + CSParsingTool.TypescriptTypeFromCSharpType(this.parameters[i].type);
+            if (i < this.parameters.Count - 1) {
+                output += ", ";
+            }
+        }
+        output += ") : " + this.returnType;
+        output += " {\n";
+        this.children.ForEach(
+            (c) => {
+                output += c.writeAsTypescript();
+            }
+        );
+        output += this.Indent() + "}\n";
+        return output;
+    }
 }

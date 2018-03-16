@@ -15,6 +15,13 @@ public class CSEntity {
         }
     }
 
+    public string Indent() {
+        if (this.parent == null) {
+            return "";
+        }
+        return this.parent.Indent() + "  ";
+    }
+
     public void AppendChild(CSEntity entity) {
         this.children.Add(entity);
         entity.parent = this;
@@ -42,6 +49,25 @@ public class CSEntity {
                 output += child.recursivelyWriteAsDebug();
             }
         );
+        return output;
+    }
+
+    virtual public string writeAsTypescript() {
+        string output = this.Indent();
+        Debug.Log("Tac");
+        output += this.rawContent;
+        if (this.children.Count == 0) {
+            output += ";\n";
+        }
+        else {
+            output += " {\n";
+            this.children.ForEach(
+                (c) => {
+                    output += c.writeAsTypescript();
+                }
+            );
+            output += this.Indent() + "}\n";
+        }
         return output;
     }
 }

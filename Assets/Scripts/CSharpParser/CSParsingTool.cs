@@ -12,4 +12,14 @@ class CSParsingTool {
         }
         return false;
     }
+
+    public static string TypescriptTypeFromCSharpType(string csharpType) {
+        if (
+            csharpType == "int" ||
+            csharpType == "float"
+        ) {
+            return "number";
+        }
+        return csharpType;
+    }
 }

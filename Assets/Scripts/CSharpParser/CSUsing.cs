@@ -7,4 +7,8 @@ public class CSUsing: CSEntity {
     override public string getPrefix() {
         return "[Using ]";
     }
+
+    override public string writeAsTypescript() {
+        return "";
+    }
 }

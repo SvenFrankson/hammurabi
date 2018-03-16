@@ -13,4 +13,14 @@ class CSRoot: CSEntity {
         );
         return output;
     }
+
+    override public string writeAsTypescript() {
+        string output = "";
+        this.children.ForEach(
+            (c) => {
+                output += c.writeAsTypescript();
+            }
+        );
+        return output;
+    }
 }
