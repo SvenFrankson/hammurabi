@@ -3,7 +3,10 @@
 [Using ] using UnityEngine
 # [Class TestMBH] [Visibility public] [Base MonoBehaviour] #
 [Class ] public class TestMBH : MonoBehaviour 
+# [Property 'speed'] [Visibility public] [Type int] [Initialize ''] #
 [Prop  ] --- public int speed
+# [Property 'test'] [Visibility private] [Type float] [Initialize '0.1f'] #
+[Prop  ] --- private float test = 0.1f
 # [Method Start] [Visibility public] [Return void] [Params:] #
 [Method] --- void Start () 
 # [Method Update] [Visibility public] [Return void] [Params:] #

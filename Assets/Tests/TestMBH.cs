@@ -5,6 +5,7 @@ using UnityEngine;
 public class TestMBH : MonoBehaviour {
 
 	public int speed;
+	private float test = 0.1f;
 
 	// Use this for initialization
 	void Start () {
