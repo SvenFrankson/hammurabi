@@ -77,15 +77,18 @@ public class CSMethod: CSEntity {
         }
         output += ") : " + this.returnType;
         output += " {";
-        if (this.children.Count > 0) {
-            output += "\n";
+        if (this.children.Count == 0) {
+            output += "}\n";
         }
-        this.children.ForEach(
-            (c) => {
-                output += c.writeAsTypescript();
-            }
-        );
-        output += this.Indent() + "}\n";
+        else {
+            output += "\n";
+            this.children.ForEach(
+                (c) => {
+                    output += c.writeAsTypescript();
+                }
+            );
+            output += this.Indent() + "}\n";
+        }
         return output;
     }
 }

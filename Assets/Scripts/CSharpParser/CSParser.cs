@@ -47,14 +47,12 @@ class CSParser {
             this.Read(script);
             return;
         } else if (c == '{') {
-            Debug.Log("{");
             CSEntity entity = CSEntityFactory.CreateEntity(this.buffer, this.current);
             this.current = entity;
             this.buffer = "";
             this.Read(script);
             return;
         } else if (c == '}') {
-            Debug.Log("}");
             this.current = this.current.parent;
             this.buffer = "";
             this.Read(script);

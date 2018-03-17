@@ -388,7 +388,11 @@ var Hammurabi;
 })(Hammurabi || (Hammurabi = {}));
 var Hammurabi;
 (function (Hammurabi) {
-    class Quaternion extends BABYLON.Vector3 {
+    class Quaternion extends BABYLON.Quaternion {
+        static AngleAxis(angle, axis) {
+            BABYLON.Quaternion.RotationAxisToRef(axis, angle / Math.PI * 180, BABYLON.Tmp.Quaternion[0]);
+            return new Quaternion(BABYLON.Tmp.Quaternion[0].x, BABYLON.Tmp.Quaternion[0].y, BABYLON.Tmp.Quaternion[0].z, BABYLON.Tmp.Quaternion[0].w);
+        }
     }
     Hammurabi.Quaternion = Quaternion;
 })(Hammurabi || (Hammurabi = {}));

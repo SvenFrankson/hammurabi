@@ -1,5 +1,6 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System.Text.RegularExpressions;
 
 public class CSEntity {
 
@@ -55,8 +56,12 @@ public class CSEntity {
     virtual public string writeAsTypescript() {
         string output = this.Indent();
         output += this.rawContent;
+        output = output.Replace("Quaternion.", "Hammurabi.Quaternion.");
+        output = output.Replace("Quaternion ", "Hammurabi.Quaternion");
+        output = output.Replace("Vector3.", "Hammurabi.Vector3.");
+        output = output.Replace("Vector3 ", "Hammurabi.Vector3");
         if (this.children.Count == 0) {
-            output += ";\n";
+            output += "\n";
         }
         else {
             output += " {\n";

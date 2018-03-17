@@ -14,7 +14,7 @@ public class TestMBH : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-		this.transform.localRotation *= Quaternion.AngleAxis(speed, Vector3.up);
+		this.transform.localRotation *= Quaternion.AngleAxis(this.speed, Vector3.up);
 	}
 
 	public void TestMethod( int   a) {

@@ -1,5 +1,5 @@
-/// <reference path="../typescript/node_modules/@types/jquery/index.d.ts" />
-/// <reference types="babylonjs" />
+/// <reference path="../../typescript/node_modules/@types/jquery/index.d.ts" />
+
 declare module Hammurabi {
     class GameObject extends BABYLON.Mesh {
         scene: Scene;
@@ -57,7 +57,7 @@ declare module Hammurabi {
         spotAngle?: number;
         center?: IVector3;
         size?: IVector3;
-        weight?: number;
+        mass?: number;
         properties?: ISerializedProperty[];
     }
     interface IMesh {
@@ -136,7 +136,8 @@ declare module Hammurabi {
     }
 }
 declare module Hammurabi {
-    class Quaternion extends BABYLON.Vector3 {
+    class Quaternion extends BABYLON.Quaternion {
+        static AngleAxis(angle: number, axis: Vector3): Quaternion;
     }
 }
 declare module Hammurabi {
@@ -177,7 +178,11 @@ declare module Hammurabi {
     class BoxCollider extends Collider {
         center: Vector3;
         size: Vector3;
+        private _localSize;
+        readonly localSize: Vector3;
+        private _staticBodyInstance;
         constructor(gameObject: GameObject);
+        private _registerStart();
         intersectsRay(ray: BABYLON.Ray): number;
         triggerMouseDown(): void;
         triggerMouseUp(): void;
