@@ -18,11 +18,10 @@ public class CSProperty: CSEntity {
             this.visibility = "public";
         }
         this.type = splitContent[hasVisibilityKey];
-        this.name = splitContent[hasVisibilityKey + 1].Replace("(", "");
+        this.name = splitContent[hasVisibilityKey + 1].Replace(";", "");
         int equalIndex = rawContent.IndexOf('=');
         if (equalIndex != -1) {
             string rawInitializer = rawContent.Substring(equalIndex + 1);
-            rawInitializer = rawInitializer.Replace(";", "");
             this.initializer = rawInitializer.Trim();
         }
     }
@@ -47,7 +46,7 @@ public class CSProperty: CSEntity {
         string output = this.Indent();
         output += this.visibility + " " + this.name + " : " + CSParsingTool.TypescriptTypeFromCSharpType(this.type);
         if (this.initializer != null) {
-            output += " = " + this.initializer;
+            output += " = " + CSParsingTool.CleanOperation(this.initializer);
         }
         output += ";\n";
         return output;

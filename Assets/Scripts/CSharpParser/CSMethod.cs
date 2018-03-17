@@ -76,7 +76,10 @@ public class CSMethod: CSEntity {
             }
         }
         output += ") : " + this.returnType;
-        output += " {\n";
+        output += " {";
+        if (this.children.Count > 0) {
+            output += "\n";
+        }
         this.children.ForEach(
             (c) => {
                 output += c.writeAsTypescript();

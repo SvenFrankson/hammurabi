@@ -19,7 +19,7 @@ public class CSEntity {
         if (this.parent == null) {
             return "";
         }
-        return this.parent.Indent() + "  ";
+        return this.parent.Indent() + "\t";
     }
 
     public void AppendChild(CSEntity entity) {
@@ -54,7 +54,6 @@ public class CSEntity {
 
     virtual public string writeAsTypescript() {
         string output = this.Indent();
-        Debug.Log("Tac");
         output += this.rawContent;
         if (this.children.Count == 0) {
             output += ";\n";

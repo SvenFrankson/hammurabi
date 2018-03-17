@@ -42,8 +42,7 @@ class CSParser {
             }
         }
         if (c == ';') {
-            Debug.Log(";");
-            CSEntity entity = CSEntityFactory.CreateEntity(this.buffer, this.current);
+            CSEntityFactory.CreateEntity(this.buffer + ";", this.current);
             this.buffer = "";
             this.Read(script);
             return;
